@@ -1,6 +1,6 @@
 # Pito's handy ROS shell setup
-# Placed in ~/mydev/rosutils/.rosbash
-# Add `source ~/mydev/rosutils/.rosbash` in ~/.bashrc at the end
+# Placed in ~/mydev/rosutils/.bashrc
+# Add `source ~/mydev/rosutils/.bashrc` in ~/.bashrc at the end
 
 myip() { ip route get 8.8.8.8 | awk '{print $NF; exit}'; }
 
