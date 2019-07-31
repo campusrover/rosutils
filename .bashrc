@@ -14,6 +14,9 @@ stopnow() { rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: { x: 0.0,  y: 0
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 export ROS_IP=$(myip)
 # export ROS_MASTER_URI=http://roscore1.cs.brandeis.edu:11311
-export ROS_MASTER_URI="http://localhost:11311"
+# export ROS_MASTER_URI="http://localhost:11311"
+# Mutant
+export ROS_MASTER_URI="http://129.64.243.63:11311"
+
 export TB3_MODEL=burger
 export TURTLEBOT3_MODEL=burger
