@@ -5,3 +5,7 @@
 1. Clone this repo into ~
 1. `cp ~/rosutils/minirover_bashrc ~/.bashrc`
 1. When the robot is first set up, also `sudo -s source rosutils/minirover_once.bash`
+
+# Setup wifi?
+
+`nmcli d wifi connect <SSID> password <password>`
