@@ -2,7 +2,7 @@
 
 echo "[running clouddesktop_once.bash]"
 
-export HOST_IP=myvpnip
+export HOST_IP=$(myvpnip)
 
 export ROS_IP=${HOST_IP}
 echo export ROS_IP=${HOST_IP} >> ~/.bashrc
