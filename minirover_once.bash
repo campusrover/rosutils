@@ -1,7 +1,7 @@
 #!/bin/bash
 
+echo "[running minirover_once.bash]"
 # Thanks to Bernardo
-
 echo 127.0.0.1 `hostname` >> /etc/hosts
 
 # Put here the local IP of the host device (robot)

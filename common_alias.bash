@@ -1,3 +1,6 @@
+echo "[running common_alias.bash]"
+
+
 alias gazempty='roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch'
 alias teleop='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch'
 alias settime='sudo ntpdate ntp.ubuntu.com'
