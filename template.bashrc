@@ -1,0 +1,1 @@
+source ~/rosutils/minirover_bashrc.bash
