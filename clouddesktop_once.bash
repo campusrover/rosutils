@@ -1,7 +1,6 @@
 #!/bin/bash
-
 echo "[running clouddesktop_once.bash]"
-
+myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 export HOST_IP=$(myvpnip)
 
 export ROS_IP=${HOST_IP}
