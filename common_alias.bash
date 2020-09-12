@@ -11,6 +11,9 @@ alias gp='git pull'
 alias cw='cd ~/catkin_ws'
 alias cs='cd ~/catkin_ws/src'
 alias cm='cd ~/catkin_ws && catkin_make'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 stopnow() { rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: { x: 0.0,  y: 0.0,  z: 0.0 }, angular: { x: 0.0,  y: 0.0, z: 0.0 } } ';  }
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
