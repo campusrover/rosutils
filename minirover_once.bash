@@ -3,7 +3,7 @@
 echo "[running minirover_once.bash]"
 # Thanks to Bernardo
 
-echo 127.0.0.1 `hostname` >> /etc/hosts
+sudo echo 127.0.0.1 `hostname` >> /etc/hosts
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 
 # Put here the local IP of the host device (robot)
