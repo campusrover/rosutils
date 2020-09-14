@@ -3,8 +3,11 @@ echo "[running clouddesktop_once.bash]"
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 export HOST_IP=$(myvpnip)
 export ROSCORE_IP=100.94.206.80
+# or
+# export ROSCORE_IP=$(myvpnip)
 
 export ROS_IP=${HOST_IP}
+expprt ROS_HOSTNAME=$(ROS_IP)
 echo export ROS_IP=${HOST_IP} >> ~/.bashrc
 
 # Default ROS master port is 11311
