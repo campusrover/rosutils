@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "[running clouddesktop_once.bash]"
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
+myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
+
 export HOST_IP=$(myvpnip)
 export ROSCORE_IP=100.94.206.80
 # or

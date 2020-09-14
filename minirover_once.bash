@@ -5,16 +5,14 @@ echo "[running minirover_once.bash]"
 
 echo 127.0.0.1 `hostname` >> /etc/hosts
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
+myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 
-# Put here the local IP of the host device (robot)
-export LANIFACE=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
-export HOST_IP=$(ifconfig ${LANIFACE} | awk '/inet / {print $2}')
-export ROS_HOSTNAME=${HOST_IP}
-
-# uncomment to be on VPN
+# uncomment to be on VPN or not
 export HOST_IP=$(myvpnip)
+#export HOST_IP=$(myip)
 
-export ROS_IP=${HOST_IP}
+export ROS_HOSTNAME=$(HOST_IP)
+export ROS_IP=$(HOST_IP)
 echo export ROS_IP=${HOST_IP} >> ~/.bashrc
 
 # Default ROS master port is 11311
