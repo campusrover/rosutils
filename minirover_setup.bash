@@ -116,4 +116,3 @@ fi
 # ROS Melodic & Workspace
 source /opt/ros/melodic/setup.bash
 source ~/rosutils/common_alias.bash
-source ~/rosutils/reset_context.bash
