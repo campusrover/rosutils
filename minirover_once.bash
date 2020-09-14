@@ -11,8 +11,8 @@ myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 export HOST_IP=$(myvpnip)
 #export HOST_IP=$(myip)
 
-export ROS_HOSTNAME=$(HOST_IP)
-export ROS_IP=$(HOST_IP)
+export ROS_HOSTNAME=$HOST_IP
+export ROS_IP=$HOST_IP
 echo export ROS_IP=${HOST_IP} >> ~/.bashrc
 
 # Default ROS master port is 11311
