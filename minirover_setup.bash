@@ -1,4 +1,4 @@
-echo "[running minirover_bashrc.bash]"
+echo "[running minirover_setup.bash]"
 
 # Updated MiniRover .bashrc
 # ~/.bashrc: executed by bash(1) for non-login shells.
