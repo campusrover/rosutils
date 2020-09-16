@@ -8,6 +8,7 @@ export HOST_IP=$(myvpnip)
 #export HOST_IP=$(myip)
 
 ROSCORE_IP=100.94.206.80
+#ROSCORE_IP=$(myvpnip)
 
 export ROS_IP=${HOST_IP}
 export ROS_HOSTNAME=${HOST_IP}

@@ -1,5 +1,6 @@
 echo "[running common_alias.bash]"
 
+# Aliases
 alias gazempty='roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch'
 alias teleop='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch'
 alias settime='sudo ntpdate ntp.ubuntu.com'
@@ -14,7 +15,12 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+# Bash Functions
 stopnow() { rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: { x: 0.0,  y: 0.0,  z: 0.0 }, angular: { x: 0.0,  y: 0.0, z: 0.0 } } ';  }
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
+
+# Prompt
+
+PS1="\w$"
