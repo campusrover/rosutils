@@ -23,4 +23,4 @@ myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3
 
 # Prompt
 
-PS1="\w$"
+PS1="\w$ "
