@@ -7,8 +7,8 @@ myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 export HOST_IP=$(myvpnip)
 #export HOST_IP=$(myip)
 
-ROSCORE_IP=100.94.206.80
-#ROSCORE_IP=$(myvpnip)
+export ROSCORE_IP=100.94.206.80
+#export ROSCORE_IP=$(myvpnip)
 
 export ROS_IP=${HOST_IP}
 echo export ROS_IP=$ROS_IP >> ~/.bashrc

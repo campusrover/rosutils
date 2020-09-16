@@ -1,4 +1,5 @@
 source ~/catkin_ws/devel/setup.bash
+cd ~/catkin_ws
 echo -e "++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "ROS_IP is $ROS_IP"
 echo "ROS_MASTER_URI is $ROS_MASTER_URI"
