@@ -15,7 +15,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias setsim='export ROS_MASTER_URI=http://$(myvpnip):11311'
-alias setrobot='export ROS_MASTER_URI=http://$(ROSCORE_IP):11311'
+alias setrobot='export ROS_MASTER_URI=http://$ROSCORE_IP:11311'
 alias showenv='source ~/rosutils/reset_context.bash'
 
 # Bash Functions
