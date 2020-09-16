@@ -11,9 +11,7 @@ ROSCORE_IP=100.94.206.80
 #ROSCORE_IP=$(myvpnip)
 
 export ROS_IP=${HOST_IP}
-export ROS_HOSTNAME=${HOST_IP}
 echo export ROS_IP=$ROS_IP >> ~/.bashrc
-echo export ROS_HOSTNAME=$HOST_IP >> ~/.bashrc
 
 # Default ROS master port is 11311
 #  - You could use 80 if accessing over the internet: roscore -p 80
