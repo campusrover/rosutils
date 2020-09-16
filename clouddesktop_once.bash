@@ -9,6 +9,7 @@ export HOST_IP=$(myvpnip)
 
 export ROSCORE_IP=100.94.206.80
 #export ROSCORE_IP=$(myvpnip)
+echo export ROSCORE_IP=$ROSCORE_IP >> ~/.bashrc
 
 export ROS_IP=${HOST_IP}
 echo export ROS_IP=$ROS_IP >> ~/.bashrc
