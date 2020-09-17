@@ -4,24 +4,24 @@
 #       docker - docker working with a simulated robot
 #       cloud - cloud working with simulated robot
 #       pi - on board actual robot
-
+echo [running rset.bash]
 if test $1 == robot; then
     echo setting environment ROBOT
     export ROS_MASTER_URI=http://$ROBOT_IP:11311
     export ROS_IP=$(myvpnip)
     export SETSTATE=ROBOT
 elif test $1 == docker; then
-    echo setting environment DOCKER
+    echo   [setting environment DOCKER]
     export ROS_MASTER_URI=http://$(myip):11311; 
     export ROS_IP=$(myip)
     export SETSTATE=docker
 elif test $1 == cloud; then
-    echo setting environment CLOUD
+    echo   [setting environment CLOUD]
     export ROS_MASTER_URI=http://$(myvpnip):11311
     export ROS_IP=$(myvpnip)
     export SETSTATE=CLOUD
 elif test $1 == pi; then
-    echo setting environment CLOUD
+    echo   [setting environment CLOUD]
     export ROS_MASTER_URI=http://$(myvpnip):11311
     export ROS_IP=$(myvpnip)
     export SETSTATE=PI
