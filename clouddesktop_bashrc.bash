@@ -116,6 +116,6 @@ if ! shopt -oq posix; then
 fi
 
 # ROS Melodic & Workspace
-source /opt/ros/melodic/setup.bash
 export EDITOR=nano
+source /opt/ros/melodic/setup.bash
 source ~/rosutils/common_alias.bash

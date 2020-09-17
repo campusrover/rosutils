@@ -3,6 +3,7 @@ echo "[running clouddesktop_once.bash]"
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 
+
 # uncomment to be on VPN or not
 export HOST_IP=$(myvpnip)
 #export HOST_IP=$(myip)
