@@ -8,7 +8,7 @@ myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 
 # Mode setters just change the ROS_MASTER_URI because everything else is the same
-alias setsim='export ROS_MASTER_URI=http://$(myvpnip):11311; export SETSTATE=sim'
+alias setcloud='export ROS_MASTER_URI=http://$(myvpnip):11311; export SETSTATE=cloud'
 alias setrobot='export ROS_MASTER_URI=http://$ROBOT_IP:11311; export SETSTATE=robot'
 alias setdocker='export ROS_MASTER_URI=http://$(myip):11311; export SETSTATE=sim'
 
