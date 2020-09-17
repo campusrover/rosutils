@@ -4,6 +4,9 @@
 #       docker - docker working with a simulated robot
 #       cloud - cloud working with simulated robot
 #       pi - on board actual robot
+myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
+myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
+
 echo [running rset.bash]
 if test $1 == robot; then
     echo setting environment ROBOT
@@ -21,7 +24,7 @@ elif test $1 == cloud; then
     export ROS_IP=$(myvpnip)
     export SETSTATE=CLOUD
 elif test $1 == pi; then
-    echo   [setting environment CLOUD]
+    echo   [setting environment pi]
     export ROS_MASTER_URI=http://$(myvpnip):11311
     export ROS_IP=$(myvpnip)
     export SETSTATE=PI
