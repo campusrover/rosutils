@@ -14,7 +14,6 @@ myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3
 echo [running rset.bash]
 if test -z $1; then
     source ~/rosutils/showenv.bash
-    exit
 elif test "$1" == "robot"; then
     echo setting environment ROBOT
     export ROS_MASTER_URI=http://$ROBOT_IP:11311
@@ -37,6 +36,5 @@ elif test "$1" == pi; then
     export SETSTATE=PI
 else
     echo bad input to rset. Must be pi, robot, docker or cloud
-    exit 2
 fi
 source ~/rosutils/showenv.bash
