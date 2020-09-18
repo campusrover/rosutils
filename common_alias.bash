@@ -22,6 +22,7 @@ alias cm='cd ~/catkin_ws && catkin_make'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias ru='cd ~/rosutils'
 alias showenv='source ~/rosutils'
 
 # Prompt
