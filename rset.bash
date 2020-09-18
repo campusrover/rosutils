@@ -8,7 +8,7 @@ myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 
 echo [running rset.bash]
-if test $1 == robot; then
+if test "$1" == robot; then
     echo setting environment ROBOT
     export ROS_MASTER_URI=http://$ROBOT_IP:11311
     export ROS_IP=$(myvpnip)
@@ -28,8 +28,7 @@ elif test $1 == pi; then
     export ROS_MASTER_URI=http://$(myvpnip):11311
     export ROS_IP=$(myvpnip)
     export SETSTATE=PI
-elif test -z $1; then
-    source ~/rosutils/shownenv.bash
 else
     echo bad input to rset. Must be pi, robot, docker or cloud
 fi
+
