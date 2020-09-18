@@ -37,4 +37,3 @@ elif test "$1" == pi; then
 else
     echo bad input to rset. Must be pi, robot, docker or cloud
 fi
-source ~/rosutils/showenv.bash
