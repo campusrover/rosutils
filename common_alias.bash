@@ -19,11 +19,11 @@ alias gs='git status'
 alias gp='git pull'
 alias cw='cd ~/catkin_ws'
 alias cs='cd ~/catkin_ws/src'
+alias cu='cd ~/rosutils'
 alias cm='cd ~/catkin_ws && catkin_make'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias ru='cd ~/rosutils'
 
 # Prompt
 
