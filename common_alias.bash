@@ -7,6 +7,7 @@ export ROBOT_IP=100.94.206.80
 stopnow() { rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: { x: 0.0,  y: 0.0,  z: 0.0 }, angular: { x: 0.0,  y: 0.0, z: 0.0 } } ';  }
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
+rset() {'source ~/rosutils/rset.bash $1';}
 
 # Aliases
 alias gazempty='roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch'
@@ -23,7 +24,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias ru='cd ~/rosutils'
-alias rset='source ~/rosutils/rset.bash $1'
 
 # Prompt
 
