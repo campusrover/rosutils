@@ -28,6 +28,8 @@ elif test $1 == pi; then
     export ROS_MASTER_URI=http://$(myvpnip):11311
     export ROS_IP=$(myvpnip)
     export SETSTATE=PI
+elif test -z $1; then
+    source ~/rosutils/shownenv.bash
 else
     echo bad input to rset. Must be pi, robot, docker or cloud
 fi
