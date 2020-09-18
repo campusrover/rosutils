@@ -23,7 +23,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias ru='cd ~/rosutils'
-alias rset='source ~/rosutils/showenv.bash'
+alias rset='source ~/rosutils/rset.bash $1'
 
 # Prompt
 

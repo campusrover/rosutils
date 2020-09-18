@@ -1,0 +1,1 @@
+source ~/rosutils/rset_current.bash
