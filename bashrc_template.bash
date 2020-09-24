@@ -1,8 +1,13 @@
+echo "[running ~/.bashrc]"
 source ~/rosutils/common_alias.bash
 echo "********************************************"
-echo "FIRST TIME: Update rset_current.bash"
-echo "Replace this block of echos with the right choice based on your needs"
-echo "One of rset_robot, rset_cloud, rset_pi"
+echo "Copy this file to ~/.bashrc"
+echo "Uncomment the rset command below"
+echo "If want to access a physical robot, place its vpnip belows"
+echo "And delete these echo lines"
 echo "********************************************"
+
+# rset robot, cloud, pi, etc.
+# export ROBOT_IP=100.94.206.80
 
 

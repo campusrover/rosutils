@@ -4,8 +4,6 @@
 #       docker - docker working with a simulated robot
 #       cloud - cloud working with simulated robot
 #       pi - on board actual robot
-# Enter by hand the known ip of the rapsberry pi on the robot
-export ROBOT_IP=100.94.206.80
 
 # Useful functions
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
