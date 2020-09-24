@@ -28,4 +28,4 @@ alias cu='cd ~/rosutils'
 
 # Prompt
 
-PS1="\w$ "
+PS1="[\$SETSTATE]\w$ "
