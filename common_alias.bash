@@ -10,6 +10,7 @@ myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3
 rset() { source ~/rosutils/rset.bash "$1";}
 
 # Aliases
+alias restart='supervisorctl -u root -p dev@ros restart x:*'
 alias gazempty='roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch'
 alias teleop='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch'
 alias settime='sudo ntpdate ntp.ubuntu.com'
