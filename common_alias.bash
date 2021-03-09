@@ -26,6 +26,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias cu='cd ~/rosutils'
+alias lw='cd ~/linorobot_ws/; source devel/setup.bash'
+alias platformio='PATH=$PATH:~/.platformio/penv/bin platformio run --target upload'
 
 # Prompt
 
