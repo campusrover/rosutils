@@ -23,13 +23,14 @@ BRU l slam
 BRU e robot 
 BRU r pitosalas
 
-ENVIROMENT VARIABLES
+INSTALLATION
+Something like this but specifics vary depending on where you are installing
 
-BRU_TYPE= # allowed tb3 bullet linorobot
-BRU_ENV= # allowed cloud robot
+Install click library, see: https://click.palletsprojects.com/en/7.x/quickstart/#virtualenv
+$ ln -s /my_ros_data/rosutils/bru.py /usr/local/bin/bru
+$ ~/rosutils$ chmod +x bru.py 
 
-PERSISTENT DATA TABLE
-(embedded in this program)
+
 
 """
 import click
