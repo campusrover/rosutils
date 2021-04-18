@@ -34,7 +34,6 @@ PERSISTENT DATA TABLE
 """
 import click
 import os
-from dotenv import dotenv_values
 
 MODES = ['cloud', 'robot']
 TYPES = ['tb3', 'minirover', 'bullet']
