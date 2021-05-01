@@ -57,10 +57,9 @@ class Bru(object):
 
     def get_env_variables(self):
         config = {}
-        self.append_env_value(config, "BRU_TYPE", "na")
-        self.append_env_value(config, "BRU_MODE", "na")
-        self.append_env_value(config, "BRU_NAME", "na")
-        self.append_env_value(config, "BRU_TYPE", "na")
+        self.append_env_value(config, "BRU_TYPE", "minirover")
+        self.append_env_value(config, "BRU_MODE", "cloud")
+        self.append_env_value(config, "BRU_NAME", "pitosalas")
         self.append_env_value(config, "ROS_IP", "na")
         self.append_env_value(config, "ROS_MASTER_URI", "na")
         self.cfg = config
