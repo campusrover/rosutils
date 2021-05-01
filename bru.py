@@ -109,6 +109,12 @@ class Bru(object):
         click.echo("ros-master-uri: {0}".format(self.cfg["ROS_MASTER_URI"]))
         click.echo("ros-ip:         {0}".format(self.cfg["ROS_IP"]))
 
+    def echo_env(self):
+        cmd1 = subprocess.Popen(["printenv", "|", "grep", "ROS"])
+        cmd2 = subprocess.Popen(["printenv", "|", "grep", "BRU"])
+        cmd2.wait()
+        cmd1.wait()
+
     def launch(self, launch_name):
         # list_files = subprocess.run(["roslaunch", "turtlebot3_gazebo", "turtlebot3_stage_4.launch"])
         list_dir = subprocess.Popen(["roslaunch", "turtlebot3_slam", "turtlebot3_slam.launch"])
@@ -123,6 +129,11 @@ def cli(ctx):
 @click.pass_obj
 def status(bru):
     bru.echo_status()
+
+@cli.command()
+@click.pass_obj
+def env(bru):
+    bru.echo_env()
 
 @cli.command()
 @click.option('-l', '--list', help='list available options', is_flag=True)
