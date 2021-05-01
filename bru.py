@@ -73,9 +73,14 @@ class Bru(object):
         if name == "sim":
             self.cfg["ROS_IP"] = self.my_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
-        else:
+        elif name == "cloud"
             self.cfg["ROS_IP"] = self.my_vpn_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(MASTER_IP[self.cfg["BRU_NAME"]])
+        elif name == "onboard":
+            self.cfg["ROS_IP"] = self.my_vpn_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
+        else:
+            click.echo("*** bug in bru.py set_mode")
         self.save_env_variables()
 
     def save_env_variables(self):
