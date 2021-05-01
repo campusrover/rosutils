@@ -13,5 +13,7 @@ echo "********************************************"
 # rset cloud # if you are on your web desktiop and working with a simulated robot
 # rset pi # if this bashrc is on your raspberry pi
 
-
+# Support for new bru mode setter
+export BRU_MY_IP=$(myip)
+export BRU_VPN_IP=$(myvpnip)
 
