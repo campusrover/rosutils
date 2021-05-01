@@ -53,6 +53,7 @@ class Bru(object):
         self.my_vpn_ip = os.environ.get("BRU_VPN_IP")
         if not all([self.my_vpn_ip, self.my_ip]):
             click.echo("You have to set up the two environment variables BRU_MY_IP and BRU_VPN_IP")
+            click.echo("export BRU_MY_IP=$(myip); export BRU_VPN_IP=$(myvpnip)")
             exit(1)
 
     def get_env_variables(self):
