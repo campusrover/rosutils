@@ -60,7 +60,9 @@ class Bru(object):
         self.append_env_value(config, "BRU_TYPE", "minirover")
         self.append_env_value(config, "BRU_MODE", "cloud")
         self.append_env_value(config, "BRU_NAME", "pitosalas")
-        self.append_env_value(config, "ROS_IP", "na")
+        self.append_env_value(config, "BRU_MY_IP", "invalid")
+        self.append_env_value(config, "BRU_VPN_IP", "invalid")
+        self.append_env_value(config, "ROS_IP", "invalid")
         self.append_env_value(config, "ROS_MASTER_URI", "na")
         self.cfg = config
 
