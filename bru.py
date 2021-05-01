@@ -62,6 +62,7 @@ class Bru(object):
         self.append_env_value(config, "BRU_NAME", "pitosalas")
         self.append_env_value(config, "ROS_IP", "na")
         self.append_env_value(config, "ROS_MASTER_URI", "na")
+        self.save_env_variables()
         self.cfg = config
 
     def append_env_value(self, dict, key, default):
