@@ -110,10 +110,13 @@ class Bru(object):
         click.echo("ros-ip:         {0}".format(self.cfg["ROS_IP"]))
 
     def echo_env(self):
-        cmd1 = subprocess.Popen(["printenv", "|", "grep", "ROS"])
-        cmd2 = subprocess.Popen(["printenv", "|", "grep", "BRU"])
-        cmd2.wait()
-        cmd1.wait()
+        click.echo("# Relevant global environment variables\n")
+        cmd1 = subprocess.Popen("printenv | grep ROS", shell=True, stdout=subprocess.PIPE)
+        cmd2 = subprocess.Popen("printenv | grep BRU", shell=True, stdout=subprocess.PIPE)
+        cmd1_out = cmd1.stdout.read()
+        cmd2_out = cmd2.stdout.read()
+        click.echo(cmd1_out)
+        click.echo(cmd2_out)
 
     def launch(self, launch_name):
         # list_files = subprocess.run(["roslaunch", "turtlebot3_gazebo", "turtlebot3_stage_4.launch"])
