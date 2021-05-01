@@ -41,10 +41,10 @@ ROBOTS = ['pitosalas', 'bullet', 'robc']
 IP = {'pitosalas': '100.72.171.120', 'bullet': '100.120.93.84', 'robc': 'x.x.x.x'}
 MASTER_IP = {'pitosalas': '100.72.171.120', 'bullet': '100.120.93.84', 'robc' : 'x.x.x.x'}
 TYPE_MAP = {'pitosalas':'minirover', 'bullet':'bullet', 'robc' : 'tb3'}
-LAUNCH_TYPES = ['stage_2']
-LAUNCH_COMMANDS = { ('tb3', 'sim', 'stage4'): ["roslaunch", "turtlebot3_gazebo", "turtlebot3_stage_4.launch"],
-                    ('tb3', 'sim',  'slam'):  ["roslaunch", "turtlebot3_slam", "turtlebot3_slam.launch"]
-                    }
+LAUNCH_TYPES = ['bringup', 'stage_2']
+LAUNCH_OPTIONS = ['--lidar/--nolidar', '--camera/--nocamera']
+LAUNCH_PERMITTED_MODES = {'bringup' : ['onboard']}
+LAUNCH_PERMITTED_OPTIONS = {'bringup' : ['camera', 'lidar']}
 
 class Bru(object):
     def __init__(self):
@@ -119,9 +119,7 @@ class Bru(object):
         click.echo(cmd2_out)
 
     def launch(self, launch_name):
-        # list_files = subprocess.run(["roslaunch", "turtlebot3_gazebo", "turtlebot3_stage_4.launch"])
-        list_dir = subprocess.Popen(["roslaunch", "turtlebot3_slam", "turtlebot3_slam.launch"])
-        list_dir.wait()
+        click.echo("Launching...{}".format(launch_name))
 
 @click.group(help="Brandeis Robotics utilities. Configure for different kinds of robots.")
 @click.pass_context
@@ -162,9 +160,10 @@ def robot(bru, list, name):
 
 @cli.command(help="Launch ROS packages. This will customize and run a launch file based on your current configuration.")
 @click.option('--list', help='list available options')
+@click.option('--camera/--nocamera')
 @click.argument('launch', type=click.Choice(LAUNCH_TYPES))
 @click.pass_obj
-def launch(bru, launch, list):
+def launch(bru, launch, list, camera):
     if (list):
         click.echo("# Available launches: ")
         [click.echo("{0}".format(lt)) for lt in LAUNCH_TYPES]
