@@ -42,9 +42,11 @@ IP = {'pitosalas': '100.72.171.120', 'bullet': '100.120.93.84', 'robc': 'x.x.x.x
 MASTER_IP = {'pitosalas': '100.72.171.120', 'bullet': '100.120.93.84', 'robc' : 'x.x.x.x'}
 TYPE_MAP = {'pitosalas':'minirover', 'bullet':'bullet', 'robc' : 'tb3'}
 LAUNCH_TYPES = ['bringup', 'stage_2']
-LAUNCH_OPTIONS = ['--lidar/--nolidar', '--camera/--nocamera']
 LAUNCH_PERMITTED_MODES = {'bringup' : ['onboard']}
 LAUNCH_PERMITTED_OPTIONS = {'bringup' : ['camera', 'lidar']}
+
+# Launch commands maps a set of ('mode', 'robot type', 'launch command' to a launch string)
+LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "xxx"}
 
 class Bru(object):
     def __init__(self):
@@ -118,25 +120,31 @@ class Bru(object):
         click.echo(cmd1_out)
         click.echo(cmd2_out)
 
-    def launch(self, launch_name):
-        click.echo("Launching...{}".format(launch_name))
+    def launch(self, launch_name, lidar, camera):
+        click.echo("Launching...{}: lidar: {}, camera: {}".format(launch_name, lidar, camera))
+        launch_pattern = (self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"], launch_name)
+        if launch_pattern in LAUNCH_MAP:
+            click.echo(LAUNCH_MAP[launch_pattern])
+        else:
+            click.echo('That launch option is not available')
+            
 
 @click.group(help="Brandeis Robotics utilities. Configure for different kinds of robots.")
 @click.pass_context
 def cli(ctx):
     ctx.obj = Bru()
 
-@cli.command()
+@cli.command(help='Display current Bru sttings')
 @click.pass_obj
 def status(bru):
     bru.echo_status()
 
-@cli.command()
+@cli.command(help='Display all relevant Environment variables')
 @click.pass_obj
 def env(bru):
     bru.echo_env()
 
-@cli.command()
+@cli.command(help='Set running modes')
 @click.option('-l', '--list', help='list available options', is_flag=True)
 @click.argument('name', type=click.Choice(MODES))
 @click.pass_obj
@@ -147,7 +155,7 @@ def mode(bru, list, name):
     else:
         bru.set_mode(name)
 
-@cli.command()
+@cli.command(help='Set type of Robot')
 @click.option('--list', '-l', help='list available options', is_flag=True)
 @click.argument('name', type=click.Choice(ROBOTS))
 @click.pass_obj
@@ -159,16 +167,17 @@ def robot(bru, list, name):
         bru.set_robot(name)
 
 @cli.command(help="Launch ROS packages. This will customize and run a launch file based on your current configuration.")
-@click.option('--list', help='list available options')
-@click.option('--camera/--nocamera')
-@click.argument('launch', type=click.Choice(LAUNCH_TYPES))
+@click.option('--list', '-l', help='list available options', flag_value='list')
+@click.option('--camera/--nocamera', default=True)
+@click.option('--lidar/--nolidar', default=True)
+@click.argument('launch', type=click.Choice(LAUNCH_TYPES), required=False)
 @click.pass_obj
-def launch(bru, launch, list, camera):
-    if (list):
-        click.echo("# Available launches: ")
+def launch(bru, launch, list, lidar, camera):
+    if (list or launch == None):
+        click.echo("# Available launches options: ")
         [click.echo("{0}".format(lt)) for lt in LAUNCH_TYPES]
     else:
-        bru.launch(launch)
+        bru.launch(launch, lidar, camera)
 
 if __name__ == '__main__':
     cli()
