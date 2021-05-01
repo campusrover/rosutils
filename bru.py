@@ -75,7 +75,7 @@ class Bru(object):
         if name == "sim":
             self.cfg["ROS_IP"] = self.my_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
-        elif name == "cloud"
+        elif name == "cloud":
             self.cfg["ROS_IP"] = self.my_vpn_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(MASTER_IP[self.cfg["BRU_NAME"]])
         elif name == "onboard":
