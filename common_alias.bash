@@ -8,6 +8,7 @@ myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 
 rset() { source ~/rosutils/rset.bash "$1";}
+brux() { ./rosutils/bru.py $1 $2 $3 $4}
 
 # Aliases
 alias restart='supervisorctl -u root -p dev@ros restart x:*'
