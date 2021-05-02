@@ -46,7 +46,7 @@ LAUNCH_PERMITTED_MODES = {'bringup' : ['onboard']}
 LAUNCH_PERMITTED_OPTIONS = {'bringup' : ['camera', 'lidar']}
 
 # Launch commands maps a set of ('mode', 'robot type', 'launch command' to a launch string)
-LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "xxx"}
+LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "roslaunch minirover mr_bringup_bru.launch lidar:={} camera:={}"}
 
 class Bru(object):
     def __init__(self):
@@ -124,10 +124,10 @@ class Bru(object):
         click.echo("Launching...{}: lidar: {}, camera: {}".format(launch_name, lidar, camera))
         launch_pattern = (self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"], launch_name)
         if launch_pattern in LAUNCH_MAP:
-            click.echo(LAUNCH_MAP[launch_pattern])
+            click.echo(LAUNCH_MAP[launch_pattern].format(lidar,camera))
         else:
             click.echo('That launch option is not available')
-            
+
 
 @click.group(help="Brandeis Robotics utilities. Configure for different kinds of robots.")
 @click.pass_context
