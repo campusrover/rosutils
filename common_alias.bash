@@ -31,4 +31,4 @@ alias platformio='PATH=$PATH:~/.platformio/penv/bin platformio run --target uplo
 
 # Prompt
 
-PS1="[\$SETSTATE]\w$ "
+PS1="[\$BRU_MODE:\$BRU_NAME ($BRU_TYPE)]\w$ "

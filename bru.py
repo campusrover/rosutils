@@ -35,18 +35,18 @@ import click
 import os
 import subprocess
 
-MODES = ['sim', 'robot', 'onboard']
+MODES = ['sim', 'real', 'onboard']
 TYPES = ['tb3', 'minirover', 'bullet']
 ROBOTS = ['pitosalas', 'bullet', 'robc']
-IP = {'pitosalas': '100.72.171.120', 'bullet': '100.120.93.84', 'robc': 'x.x.x.x'}
-MASTER_IP = {'pitosalas': '100.72.171.120', 'bullet': '100.120.93.84', 'robc' : 'x.x.x.x'}
+ROBOT_VPNIP = {'pitosalas': '100.120.93.84.120', 'bullet': '100.120.93.84'}
 TYPE_MAP = {'pitosalas':'minirover', 'bullet':'bullet', 'robc' : 'tb3'}
-LAUNCH_TYPES = ['bringup', 'stage_2']
-LAUNCH_PERMITTED_MODES = {'bringup' : ['onboard']}
+LAUNCH_TYPES = ['bringup', 'stage_2', 'rviz']
+LAUNCH_PERMITTED_MODES = {'bringup' : ['onboard'], 'rviz' : ['real', 'sim']}
 LAUNCH_PERMITTED_OPTIONS = {'bringup' : ['camera', 'lidar']}
 
 # Launch commands maps a set of ('mode', 'robot type', 'launch command' to a launch string)
-LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "roslaunch minirover mr_bringup_bru.launch lidar:={} camera:={}"}
+LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "roslaunch minirover mr_bru_bringup.launch lidar:={0} camera:={1}",
+                ('real', 'minirover', 'rviz'): "roslaunch {2}" }
 
 class Bru(object):
     def __init__(self):
@@ -75,17 +75,7 @@ class Bru(object):
 
     def set_mode(self, name):
         self.cfg["BRU_MODE"] = name
-        if name == "sim":
-            self.cfg["ROS_IP"] = self.my_ip
-            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
-        elif name == "cloud":
-            self.cfg["ROS_IP"] = self.my_vpn_ip
-            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(MASTER_IP[self.cfg["BRU_NAME"]])
-        elif name == "onboard":
-            self.cfg["ROS_IP"] = self.my_vpn_ip
-            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
-        else:
-            click.echo("*** bug in bru.py set_mode")
+        self.calc_ip()
         self.save_env_variables()
 
     def save_env_variables(self):
@@ -96,9 +86,8 @@ class Bru(object):
 
     def set_robot(self, name):
         self.cfg["BRU_NAME"] = name
-        self.cfg["ROS_MASTER_URI"]="http://{0}:11311".format(MASTER_IP[name])
-        self.cfg["ROS_IP"] = self.my_vpn_ip
         self.cfg["BRU_TYPE"] = TYPE_MAP[name]
+        self.calc_ip()
         self.save_env_variables()
 
     def echo_status(self):
@@ -111,6 +100,20 @@ class Bru(object):
         click.echo("ros-master-uri: {0}".format(self.cfg["ROS_MASTER_URI"]))
         click.echo("ros-ip:         {0}".format(self.cfg["ROS_IP"]))
 
+    def  calc_ip(self):
+        if self.cfg["BRU_MODE"] == "sim":
+            self.cfg["ROS_IP"] = self.my_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
+        elif self.cfg["BRU_MODE"] == "real":
+            self.cfg["ROS_IP"] = self.my_vpn_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(ROBOT_VPNIP[self.cfg["BRU_NAME"]])
+        elif self.cfg["BRU_MODE"] == "onboard":
+            self.cfg["ROS_IP"] = self.my_vpn_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
+        else:
+            click.echo("*** bug in bru.py calc_ip")
+
+
     def echo_env(self):
         click.echo("# Relevant global environment variables\n")
         cmd1 = subprocess.Popen("printenv | grep ROS", shell=True, stdout=subprocess.PIPE)
@@ -120,11 +123,11 @@ class Bru(object):
         click.echo(cmd1_out)
         click.echo(cmd2_out)
 
-    def launch(self, launch_name, lidar, camera):
-        click.echo("Launching...{}: lidar: {}, camera: {}".format(launch_name, lidar, camera))
+    def launch(self, launch_name, lidar, camera, desc):
+        click.echo("Launching...{}: lidar: {}, camera: {}, desc: {}".format(launch_name, lidar, camera, desc))
         launch_pattern = (self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"], launch_name)
         if launch_pattern in LAUNCH_MAP:
-            click.echo(LAUNCH_MAP[launch_pattern].format(lidar,camera))
+            click.echo(LAUNCH_MAP[launch_pattern].format(lidar, camera, desc))
         else:
             click.echo('That launch option is not available')
 
@@ -170,14 +173,15 @@ def robot(bru, list, name):
 @click.option('--list', '-l', help='list available options', flag_value='list')
 @click.option('--camera/--nocamera', default=True)
 @click.option('--lidar/--nolidar', default=True)
+@click.option('--desc/--nodesc', default=True)
 @click.argument('launch', type=click.Choice(LAUNCH_TYPES), required=False)
 @click.pass_obj
-def launch(bru, launch, list, lidar, camera):
+def launch(bru, launch, list, lidar, camera, desc):
     if (list or launch == None):
         click.echo("# Available launches options: ")
         [click.echo("{0}".format(lt)) for lt in LAUNCH_TYPES]
     else:
-        bru.launch(launch, lidar, camera)
+        bru.launch(launch, lidar, camera, desc)
 
 if __name__ == '__main__':
     cli()
