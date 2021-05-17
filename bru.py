@@ -38,15 +38,9 @@ import subprocess
 MODES = ['sim', 'real', 'onboard']
 TYPES = ['tb3', 'minirover', 'bullet']
 ROBOTS = ['pitosalas', 'bullet', 'robc']
-ROBOT_VPNIP = {'pitosalas': '100.120.93.84.120', 'bullet': '100.120.93.84'}
+ROBOT_VPNIP = {'pitosalas': '100.120.93.84', 'bullet': '100.120.93.84'}
 TYPE_MAP = {'pitosalas':'minirover', 'bullet':'bullet', 'robc' : 'tb3'}
 LAUNCH_TYPES = ['bringup', 'stage_2', 'rviz']
-LAUNCH_PERMITTED_MODES = {'bringup' : ['onboard'], 'rviz' : ['real', 'sim']}
-LAUNCH_PERMITTED_OPTIONS = {'bringup' : ['camera', 'lidar']}
-
-# Launch commands maps a set of ('mode', 'robot type', 'launch command' to a launch string)
-LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "roslaunch minirover mr_bru_bringup.launch lidar:={0} camera:={1}",
-                ('real', 'minirover', 'rviz'): "roslaunch {2}" }
 
 class Bru(object):
     def __init__(self):
@@ -123,11 +117,15 @@ class Bru(object):
         click.echo(cmd1_out)
         click.echo(cmd2_out)
 
-    def launch(self, launch_name, lidar, camera, desc):
+    # Launch commands maps a set of ('mode', 'robot type', 'launch command' to a launch string)
+    LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "roslaunch minirover mr_bru_bringup.launch lidar:={0} camera:={1} joy:={3}",
+                ('real', 'minirover', 'rviz'): "roslaunch minirover mr_bru_rviz.launch desc:={2} gmapping:={4}" }
+
+    def launch(self, launch_name, lidar, camera, desc, joy, gmapping):
         click.echo("Launching...{}: lidar: {}, camera: {}, desc: {}".format(launch_name, lidar, camera, desc))
         launch_pattern = (self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"], launch_name)
-        if launch_pattern in LAUNCH_MAP:
-            click.echo(LAUNCH_MAP[launch_pattern].format(lidar, camera, desc))
+        if launch_pattern in Bru.LAUNCH_MAP:
+            click.echo(Bru.LAUNCH_MAP[launch_pattern].format(lidar, camera, desc, joy, gmapping))
         else:
             click.echo('That launch option is not available')
 
@@ -174,14 +172,16 @@ def robot(bru, list, name):
 @click.option('--camera/--nocamera', default=True)
 @click.option('--lidar/--nolidar', default=True)
 @click.option('--desc/--nodesc', default=True)
+@click.option('--joy/--nojoy', default=False)
+@click.option('--gmapping/--nogmapping', default=False)
 @click.argument('launch', type=click.Choice(LAUNCH_TYPES), required=False)
 @click.pass_obj
-def launch(bru, launch, list, lidar, camera, desc):
+def launch(bru, launch, list, lidar, camera, desc, joy, gmapping):
     if (list or launch == None):
         click.echo("# Available launches options: ")
         [click.echo("{0}".format(lt)) for lt in LAUNCH_TYPES]
     else:
-        bru.launch(launch, lidar, camera, desc)
+        bru.launch(launch, lidar, camera, desc, joy, gmapping)
 
 if __name__ == '__main__':
     cli()
