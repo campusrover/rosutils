@@ -24,7 +24,6 @@ case "$( lsb_release -d | grep -Eoi 'Ununtu 16.04|'Ubuntu 18.04|Ubuntu 20.04|Deb
     gpg=https://pkgs.tailscale.com/stable/ubuntu/xenial.gpg
     list=https://pkgs.tailscale.com/stable/ubuntu/xenial.list
     ;;
-
   *)
     echo "${errorf}  Unsupported OS${reset}"
     exit 1
