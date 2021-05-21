@@ -7,7 +7,7 @@ errorf=`tput setaf 1`
 donef=`tput setaf 2`
 reset=`tput sgr0`
 
-case "$( lsb_release -d | grep -Eoi 'Ubuntu 18.04|Ubuntu 20.04|Debian' )" in
+case "$( lsb_release -d | grep -Eoi 'Ununtu 16.04|'Ubuntu 18.04|Ubuntu 20.04|Debian' )" in
   "Debian")
     gpg=https://pkgs.tailscale.com/stable/raspbian/buster.gpg
     list=https://pkgs.tailscale.com/stable/raspbian/buster.list
