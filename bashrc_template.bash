@@ -4,16 +4,15 @@ echo "********************************************"
 
 echo "[running ~/.bashrc]"
 source ~/rosutils/common_alias.bash
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/catkin_ws/devel/setup.bash
+cd ~/catkin_ws
 
-# If you are working with a real robot (or are the real robot) uncomment
-# this line and put the vpnip of the robot
-# export ROBOT_IP=100.94.206.xx
+# Support for new bru mode setter
+export BRU_MY_IP=$(myip)
+export BRU_VPN_IP=$(myvpnip)
 
-# Uncomment one of these"
-# rset robot # if you are on your web desktop and want to control a real robot
-# rset cloud # if you are on your web desktiop and working with a simulated robot
-# rset pi # if this bashrc is on your raspberry pi
-
-
+bru mode sim
+source ~/.bruenv
+bru robot pitosalas
+source ~/.bruenv
 
