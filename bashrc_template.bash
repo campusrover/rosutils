@@ -1,8 +1,10 @@
-echo "[running ~/.bashrc]"
-source ~/rosutils/common_alias.bash
 echo "********************************************"
 echo "Copy this file to ~/.bashrc and edit it according to the instuctions below"
 echo "********************************************"
+
+echo "[running ~/.bashrc]"
+source ~/rosutils/common_alias.bash
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # If you are working with a real robot (or are the real robot) uncomment
 # this line and put the vpnip of the robot
