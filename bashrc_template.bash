@@ -4,7 +4,9 @@ echo "********************************************"
 
 echo "[running ~/.bashrc]"
 source ~/rosutils/common_alias.bash
+source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
+
 cd ~/catkin_ws
 
 # Support for new bru mode setter
