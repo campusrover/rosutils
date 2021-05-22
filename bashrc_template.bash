@@ -15,6 +15,6 @@ export BRU_VPN_IP=$(myvpnip)
 
 bru mode sim
 source ~/.bruenv
-bru robot pitosalas
+bru robot ... fill in name ...
 source ~/.bruenv
 

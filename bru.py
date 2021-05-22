@@ -156,11 +156,11 @@ def mode(bru, list, name):
     else:
         bru.set_mode(name)
 
-@cli.command(help='Set type of Robot')
+@cli.command(help='Set name of Robot')
 @click.option('--list', '-l', help='list available options', is_flag=True)
 @click.argument('name', type=click.Choice(ROBOTS))
 @click.pass_obj
-def robot(bru, list, name):
+def name(bru, list, name):
     if (list):
         click.echo("# Available robots: ")
         [click.echo("{0} ({1})".format(rname, IP[rname])) for rname in ROBOTS]
