@@ -95,6 +95,7 @@ class Bru(object):
         click.echo("ros-ip:         {0}".format(self.cfg["ROS_IP"]))
 
     def  calc_ip(self):
+        click.echo(self.cfg)
         if self.cfg["BRU_MODE"] == "sim":
             self.cfg["ROS_IP"] = self.my_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
