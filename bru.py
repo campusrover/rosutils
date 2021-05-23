@@ -8,21 +8,14 @@ All commands and subcommands can be abbreviated to a single letter
 
 COMMANDS:
 
-s[tatus] - show the current settings
-e[vironment] - set the execution enviornment. Values are c (cloud), r (robot)
-r[robot] - set the robot. Values are tb3 (turtlebot3), mr (minirover), bull (bullet)
+s[tatus] - show the current bru settings
+e[vironment] - display all environment variables
+n[ame] - set the robot name
+m[ode] - set mode, from real, sim and oboard
 l[launch] - a set of actual action commands
 
 ARGUMENTS
 -l - list
-
-EXAMPLES
-BRU l bringup (will only work if running on a robot)
-BRU l navigate
-BRU l slam
-BRU e robot 
-BRU r pitosalas
-
 INSTALLATION
 Something like this but specifics vary depending on where you are installing
 
@@ -55,7 +48,7 @@ class Bru(object):
     def get_env_variables(self):
         config = {}
         self.append_env_value(config, "BRU_TYPE", "minirover")
-        self.append_env_value(config, "BRU_MODE", "cloud")
+        self.append_env_value(config, "BRU_MODE", "real")
         self.append_env_value(config, "BRU_NAME", "pitosalas")
         self.append_env_value(config, "BRU_MY_IP", "invalid")
         self.append_env_value(config, "BRU_VPN_IP", "invalid")
@@ -95,7 +88,6 @@ class Bru(object):
         click.echo("ros-ip:         {0}".format(self.cfg["ROS_IP"]))
 
     def  calc_ip(self):
-        click.echo(self.cfg)
         if self.cfg["BRU_MODE"] == "sim":
             self.cfg["ROS_IP"] = self.my_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
