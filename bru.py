@@ -31,7 +31,7 @@ import subprocess
 MODES = ['sim', 'real', 'onboard']
 TYPES = ['tb3', 'minirover', 'bullet']
 ROBOTS = ['pitosalas', 'bullet', 'robc', 'mr1', 'mr2']
-ROBOT_VPNIP = {'pitosalas': '100.120.93.84', 'bullet': '100.120.93.84', 'mr1': '100.80.161.82', 'mr2' : '100.80.161.82'}
+ROBOT_VPNIP = {'pitosalas': '100.120.93.84', 'bullet': '100.120.93.84', 'mr1': '100.80.161.82', 'mr2' : '100.120.93.84'}
 TYPE_MAP = {'pitosalas':'minirover', 'bullet':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
 LAUNCH_TYPES = ['bringup', 'stage_2', 'rviz']
 
