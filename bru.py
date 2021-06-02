@@ -31,7 +31,6 @@ import subprocess
 MODES = ['sim', 'real', 'onboard']
 TYPES = ['tb3', 'minirover', 'bullet']
 ROBOTS = ['pitosalas', 'bullet', 'robc', 'mr1', 'mr2']
-ROBOT_VPNIP = {'pitosalas': '100.120.93.84', 'bullet': '100.120.93.84', 'mr1': '100.80.161.82', 'mr2' : '100.116.145.120'}
 TYPE_MAP = {'pitosalas':'minirover', 'bullet':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
 LAUNCH_TYPES = ['bringup', 'stage_2', 'rviz']
 
@@ -71,9 +70,10 @@ class Bru(object):
             { f.write("export {0}={1}\n".format(k,v)) for (k,v) in self.cfg.items() }
         click.echo("# Remember to source ~/.bruenv!")
 
-    def set_robot(self, name):
+    def set_robot(self, name, master_ip):
         self.cfg["BRU_NAME"] = name
         self.cfg["BRU_TYPE"] = TYPE_MAP[name]
+        self.cfg["BRU_MASTER_IP"] = master_ip
         self.calc_ip()
         self.save_env_variables()
 
@@ -93,7 +93,7 @@ class Bru(object):
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
         elif self.cfg["BRU_MODE"] == "real":
             self.cfg["ROS_IP"] = self.my_vpn_ip
-            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(ROBOT_VPNIP[self.cfg["BRU_NAME"]])
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.cfg["BRU_MASTER_IP"])
         elif self.cfg["BRU_MODE"] == "onboard":
             self.cfg["ROS_IP"] = self.my_vpn_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
@@ -151,14 +151,16 @@ def mode(bru, list, name):
 
 @cli.command(help='Set name of Robot')
 @click.option('--list', '-l', help='list available options', is_flag=True)
+@click.option('--master_ip', '-m', prompt=True,
+              help='vpn ip address of robot')
 @click.argument('name', type=click.Choice(ROBOTS))
 @click.pass_obj
-def name(bru, list, name):
+def name(bru, list, name, master_ip):
     if (list):
         click.echo("# Available robots: ")
         [click.echo("{0} ({1})".format(rname, IP[rname])) for rname in ROBOTS]
     else:
-        bru.set_robot(name)
+        bru.set_robot(name, master_ip)
 
 @cli.command(help="Launch ROS packages. This will customize and run a launch file based on your current configuration.")
 @click.option('--list', '-l', help='list available options', flag_value='list')
