@@ -50,6 +50,7 @@ class Bru(object):
         self.append_env_value(config, "BRU_MODE", "real")
         self.append_env_value(config, "BRU_NAME", "pitosalas")
         self.append_env_value(config, "BRU_MY_IP", "invalid")
+        self.append_env_value(config, "BRU_MASTER_IP", "invalid")
         self.append_env_value(config, "BRU_VPN_IP", "invalid")
         self.append_env_value(config, "ROS_IP", "invalid")
         self.append_env_value(config, "ROS_MASTER_URI", "na")
@@ -62,20 +63,17 @@ class Bru(object):
     def set_mode(self, name):
         self.cfg["BRU_MODE"] = name
         self.calc_ip()
-        self.save_env_variables()
+        self.export_env()
 
-    def save_env_variables(self):
-        with open(os.path.expanduser('~/.bruenv'), "w") as f:
-            f.write("# environment variables set by rpt.py\n")
-            { f.write("export {0}={1}\n".format(k,v)) for (k,v) in self.cfg.items() }
-        click.echo("# Remember to source ~/.bruenv!")
+    def export_env(self):
+        { click.echo("export {0}={1}".format(k,v)) for (k,v) in self.cfg.items() }
 
     def set_robot(self, name, master_ip):
         self.cfg["BRU_NAME"] = name
         self.cfg["BRU_TYPE"] = TYPE_MAP[name]
         self.cfg["BRU_MASTER_IP"] = master_ip
         self.calc_ip()
-        self.save_env_variables()
+        self.export_env()
 
     def echo_status(self):
         click.echo("# Current bru status")
@@ -137,6 +135,12 @@ def status(bru):
 @click.pass_obj
 def env(bru):
     bru.echo_env()
+
+@cli.command(help='Display bash commands to export state')
+@click.pass_obj
+def export(bru):
+    bru.export_env()
+
 
 @cli.command(help='Set running modes')
 @click.option('-l', '--list', help='list available options', is_flag=True)
