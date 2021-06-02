@@ -13,8 +13,5 @@ cd ~/catkin_ws
 export BRU_MY_IP=$(myip)
 export BRU_VPN_IP=$(myvpnip)
 
-bru mode sim
-source ~/.bruenv
-bru name ... fill in name ...
-source ~/.bruenv
-
+$(bru mode sim)
+$(bru bru name <name> -m <robots-vpn-ip>
