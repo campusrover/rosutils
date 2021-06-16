@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 BRU: working with robots from the Brandeis Robotics Lab
 
@@ -30,8 +30,8 @@ import subprocess
 
 MODES = ['sim', 'real', 'onboard']
 TYPES = ['tb3', 'minirover', 'bullet']
-ROBOTS = ['pitosalas', 'bullet', 'robc', 'mr1', 'mr2']
-TYPE_MAP = {'pitosalas':'minirover', 'bullet':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
+ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'mr2']
+TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
 LAUNCH_TYPES = ['bringup', 'stage_2', 'rviz']
 
 class Bru(object):
