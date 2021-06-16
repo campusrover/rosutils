@@ -12,7 +12,7 @@ s[tatus] - show the current bru settings
 e[vironment] - display all environment variables
 n[ame] - set the robot name
 m[ode] - set mode, from real, sim and oboard
-l[launch] - a set of actual action commands
+ql[launch] - a set of actual action commands
 
 ARGUMENTS
 -l - list

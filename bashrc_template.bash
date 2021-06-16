@@ -14,4 +14,4 @@ export BRU_MY_IP=$(myip)
 export BRU_VPN_IP=$(myvpnip)
 
 $(bru mode sim)
-$(bru bru name <name> -m <robots-vpn-ip>
+$(bru name <name> -m <robots-vpn-ip>
