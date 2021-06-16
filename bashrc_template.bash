@@ -7,11 +7,9 @@ source ~/rosutils/common_alias.bash
 source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
 
-cd ~/catkin_ws
-
 # Support for new bru mode setter
 export BRU_MY_IP=$(myip)
 export BRU_VPN_IP=$(myvpnip)
 
 $(bru mode sim)
-$(bru bru name <name> -m <robots-vpn-ip>
+$(bru bru name <name> -m $(myvpnip))
