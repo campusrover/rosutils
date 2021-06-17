@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 BRU: working with robots from the Brandeis Robotics Lab
 
@@ -12,7 +12,7 @@ s[tatus] - show the current bru settings
 e[vironment] - display all environment variables
 n[ame] - set the robot name
 m[ode] - set mode, from real, sim and oboard
-l[launch] - a set of actual action commands
+ql[launch] - a set of actual action commands
 
 ARGUMENTS
 -l - list
@@ -30,8 +30,8 @@ import subprocess
 
 MODES = ['sim', 'real', 'onboard']
 TYPES = ['tb3', 'minirover', 'bullet']
-ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'mr2']
-TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
+ROBOTS = ['pitosalas', 'bullet', 'robc', 'mr1', 'mr2']
+TYPE_MAP = {'pitosalas':'minirover', 'bullet':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
 LAUNCH_TYPES = ['bringup', 'stage_2', 'rviz']
 
 class Bru(object):
