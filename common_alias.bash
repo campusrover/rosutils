@@ -27,6 +27,7 @@ alias restart='supervisorctl -u root -p dev@ros restart x:*'
 alias sb='source ~/.bashrc'
 alias settime='sudo ntpdate ntp.ubuntu.com'
 alias teleop='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch'
+alias eduroam='nmcli connection up eduroam --ask'
 
 # Prompt
 
