@@ -28,7 +28,7 @@ import click
 import os
 import subprocess
 
-MODES = ['sim', 'real', 'onboard']
+MODES = ['sim', 'real', 'onboard', 'labonboard']
 TYPES = ['tb3', 'minirover', 'bullet']
 ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'mr2']
 TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
@@ -95,6 +95,9 @@ class Bru(object):
         elif self.cfg["BRU_MODE"] == "onboard":
             self.cfg["ROS_IP"] = self.my_vpn_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
+        elif self.cfg["BRU_MODE"] == "labonboard":
+            self.cfg["ROS_IP"] = self.my_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
         else:
             click.echo("*** bug in bru.py calc_ip")
 
