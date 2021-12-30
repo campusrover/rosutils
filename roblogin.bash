@@ -12,4 +12,4 @@
 # sshpass -p ${robpass} ssh -l ubuntu ${robip} 'source .bashrc'
 export SSHPASS="ROSlab134"
 bu="/home/ubuntu/bringup.sh -m "$(printenv ROS_MASTER_URI)
-roscore & sshpass -e ssh 'ubuntu@172.22.5.168' $bu
+roscore & sshpass -e ssh 'ubuntu@100.82.10.90' $bu
