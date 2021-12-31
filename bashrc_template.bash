@@ -12,7 +12,7 @@ export BRU_MY_IP=$(myip)
 export BRU_VPN_IP=$(myvpnip)
 
 $(bru mode sim)
-$(bru bru name <name> -m $(myvpnip))
+$(bru name <name> -m $(myvpnip))
 
 # Support for Linorobot
 export LINOLIDAR="2wd"
