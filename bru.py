@@ -12,10 +12,20 @@ s[tatus] - show the current bru settings
 e[vironment] - display all environment variables
 n[ame] - set the robot name
 m[ode] - set mode, from real, sim and oboard
-l[launch] - a set of actual action commands
+h[ostname] - change hostname of a real robot (future)
+
+# commands to launch software on the robot
+
+bringup - complete launch with all devices
+camera - just camera node
+lidar - just lidar node
+joystick - just joystick
+urdf - just urdf/description
+core - nothing more than cmd_vel publisher
 
 ARGUMENTS
 -l - list
+
 INSTALLATION
 Something like this but specifics vary depending on where you are installing
 
