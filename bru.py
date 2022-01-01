@@ -12,16 +12,7 @@ s[tatus] - show the current bru settings
 e[vironment] - display all environment variables
 n[ame] - set the robot name
 m[ode] - set mode, from real, sim and oboard
-h[ostname] - change hostname of a real robot (future)
-
-# commands to launch software on the robot
-
-bringup - complete launch with all devices
-camera - just camera node
-lidar - just lidar node
-joystick - just joystick
-urdf - just urdf/description
-core - nothing more than cmd_vel publisher
+r[obot] - control a robot remotely
 
 ARGUMENTS
 -l - list
@@ -42,7 +33,6 @@ MODES = ['sim', 'real', 'onboard', 'labonboard']
 TYPES = ['tb3', 'minirover', 'bullet']
 ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'mr2']
 TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
-LAUNCH_TYPES = ['bringup', 'stage_2', 'rviz']
 
 class Bru(object):
     def __init__(self):
@@ -122,17 +112,33 @@ class Bru(object):
         click.echo(cmd2_out)
 
     # Launch commands maps a set of ('mode', 'robot type', 'launch command' to a launch string)
-    LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "roslaunch minirover mr_bru_bringup.launch lidar:={0} camera:={1} joy:={3}",
-                ('real', 'minirover', 'rviz'): "roslaunch minirover mr_bru_rviz.launch desc:={2} gmapping:={4}" }
+    SUBCOMMAND_DISPATCH = { 
+        ("bringup", "real", "minirover"): "roslaunch minirover mr_bru_bringup.launch lidar:={0} camera:={1} joy:={3}",
+        ("kill", "real", "minirover"): "rosnode kill -a",
+        ("status", "real", "minirover"): "rostopic list"}
 
-    def launch(self, launch_name, lidar, camera, desc, joy, gmapping):
-        click.echo("Launching...{}: lidar: {}, camera: {}, desc: {}".format(launch_name, lidar, camera, desc))
-        launch_pattern = (self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"], launch_name)
-        if launch_pattern in Bru.LAUNCH_MAP:
-            click.echo(Bru.LAUNCH_MAP[launch_pattern].format(lidar, camera, desc, joy, gmapping))
+    def remote(self, command, lidar, camera, desc, joy):
+        click.echo("Launching...{}: lidar: {}, camera: {}, joy: {}, desc: {}".format(command, lidar, camera, joy, desc))
+        dispatch_pattern = (command, self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"])
+
+        if dispatch_pattern in Bru.SUBCOMMAND_DISPATCH:
+            self.ssh(Bru.SUBCOMMAND_DISPATCH[dispatch_pattern].format(lidar, camera, desc, joy))
         else:
-            click.echo('That launch option is not available')
-
+            click.echo('BUG: That launch option is not available')
+    
+    def ssh(self, command_line):
+        ssh_cmd = ["ssh", "pi@" + self.cfg["BRU_MASTER_IP"], command_line]
+        click.echo(ssh_cmd)
+        click.echo("1")
+        #cmd1 = subprocess.Popen(" ".join(ssh_cmd), shell=True, stdout=subprocess.PIPE)
+        completed_process = subprocess.run(" ".join(ssh_cmd), shell=True, capture_output=True, text=True)
+        #completed_process = subprocess.Popen(" ".join(ssh_cmd), shell=True, stdout=subprocess.PIPE)
+        click.echo("2")
+        #completed_process.communicate()
+        click.echo("2a")
+        #cmd1_out = completed_process.stdout.read()
+        click.echo(completed_process.stdout.read())
+        click.echo("3")
 
 @click.group(help="Brandeis Robotics utilities. Configure for different kinds of robots.")
 @click.pass_context
@@ -178,21 +184,19 @@ def name(bru, list, name, master_ip):
     else:
         bru.set_robot(name, master_ip)
 
-@cli.command(help="Launch ROS packages. This will customize and run a launch file based on your current configuration.")
+ROBOT_SUBCOMMANDS = ['bringup', 'kill', 'status']
+
+@cli.command(help="Control the attached robot remotely")
 @click.option('--list', '-l', help='list available options', flag_value='list')
 @click.option('--camera/--nocamera', default=True)
 @click.option('--lidar/--nolidar', default=True)
 @click.option('--desc/--nodesc', default=True)
-@click.option('--joy/--nojoy', default=False)
-@click.option('--gmapping/--nogmapping', default=False)
-@click.argument('launch', type=click.Choice(LAUNCH_TYPES), required=False)
+@click.option('--joy/--nojoy', default=True)
+@click.argument('command', type=click.Choice(ROBOT_SUBCOMMANDS), required=True)
 @click.pass_obj
-def launch(bru, launch, list, lidar, camera, desc, joy, gmapping):
-    if (list or launch == None):
-        click.echo("# Available launches options: ")
-        [click.echo("{0}".format(lt)) for lt in LAUNCH_TYPES]
-    else:
-        bru.launch(launch, lidar, camera, desc, joy, gmapping)
+
+def robot(bru, command, list, lidar, camera, desc, joy):
+    bru.remote(command, lidar, camera, desc, joy)
 
 if __name__ == '__main__':
     cli()
