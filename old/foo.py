@@ -1,9 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 import sys
-print("Python version")
-print (sys.version)
-print("Version info.")
-print (sys.version_info)
+import paramiko
 
-import subprocess as sp
-print(sp.DETACHED_PROCESS)

@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+
 """
 BRU: working with robots from the Brandeis Robotics Lab
 
@@ -28,6 +29,8 @@ $ ~/rosutils$ chmod +x bru.py
 import click
 import os
 import subprocess
+import paramiko
+import time
 
 MODES = ['sim', 'real', 'onboard', 'labonboard']
 TYPES = ['tb3', 'minirover', 'bullet']
@@ -122,7 +125,7 @@ class Bru(object):
         dispatch_pattern = (command, self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"])
 
         if dispatch_pattern in Bru.SUBCOMMAND_DISPATCH:
-            self.ssh(Bru.SUBCOMMAND_DISPATCH[dispatch_pattern].format(lidar, camera, desc, joy))
+            self.sshp(Bru.SUBCOMMAND_DISPATCH[dispatch_pattern].format(lidar, camera, desc, joy), 10)
         else:
             click.echo('BUG: That launch option is not available')
     
@@ -131,14 +134,33 @@ class Bru(object):
         click.echo(ssh_cmd)
         click.echo("1")
         #cmd1 = subprocess.Popen(" ".join(ssh_cmd), shell=True, stdout=subprocess.PIPE)
-        completed_process = subprocess.run(" ".join(ssh_cmd), shell=True, capture_output=True, text=True)
-        #completed_process = subprocess.Popen(" ".join(ssh_cmd), shell=True, stdout=subprocess.PIPE)
+        #completed_process = subprocess.run(" ".join(ssh_cmd), shell=True, capture_output=True, text=True)
+        completed_process = subprocess.Popen(" ".join(ssh_cmd), shell=True, stdout=subprocess.PIPE)
         click.echo("2")
         #completed_process.communicate()
         click.echo("2a")
         #cmd1_out = completed_process.stdout.read()
         click.echo(completed_process.stdout.read())
         click.echo("3")
+
+    def sshp(self, command_line, sleep):
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_client.load_system_host_keys()
+        ssh_client.connect(hostname=self.cfg["BRU_MASTER_IP"],
+                    username='pi',
+                    password='ROSlab134')
+        stdin, stdout, stderr = ssh_client.exec_command(command_line, timeout=sleep)
+        out = stdout.read().decode().strip()
+        error = stderr.read().decode().strip()
+        if error:
+            raise Exception('There was an error pulling the runtime: {}'.format(error))
+        else:
+            print(out)
+        ssh_client.close()
+
+
+
 
 @click.group(help="Brandeis Robotics utilities. Configure for different kinds of robots.")
 @click.pass_context
