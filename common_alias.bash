@@ -28,7 +28,7 @@ alias sb='source ~/.bashrc'
 alias settime='sudo ntpdate ntp.ubuntu.com'
 alias teleop='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch'
 alias eduroam='nmcli connection up eduroam --ask'
-alias cmsingle='catkin_make --only-pkg-with-deps minirover'
+alias cmsingle='catkin_make --only-pkg-with-deps'
 alias cmall='catkin_make -DCATKIN_WHITELIST_PACKAGES=""'
 
 # Prompt
