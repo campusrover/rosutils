@@ -16,10 +16,10 @@
 
 set -e
 
-UDEV_RULES_NAME="49-teensy.rules"
+UDEV_RULES_NAME="00-teensy.rules"
 UDEV_RULES_URL="https://www.pjrc.com/teensy/$UDEV_RULES_NAME"
 UDEV_RULES_SHA256="031de0b26991b5a3b19c497d9c0a17f86c40c55d925b9d07d19ab89f2286469d  $UDEV_RULES_NAME"
-UDEV_RULES_DEST="/lib/udev/rules.d/49-teensy.rules"
+UDEV_RULES_DEST="/lib/udev/rules.d/00-teensy.rules"
 
 WORK_DIR=$(mktemp -d)
 
