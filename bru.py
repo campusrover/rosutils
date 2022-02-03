@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+
 """
 BRU: working with robots from the Brandeis Robotics Lab
 
@@ -12,10 +13,11 @@ s[tatus] - show the current bru settings
 e[vironment] - display all environment variables
 n[ame] - set the robot name
 m[ode] - set mode, from real, sim and oboard
-l[launch] - a set of actual action commands
+r[obot] - control a robot remotely
 
 ARGUMENTS
 -l - list
+
 INSTALLATION
 Something like this but specifics vary depending on where you are installing
 
@@ -27,12 +29,13 @@ $ ~/rosutils$ chmod +x bru.py
 import click
 import os
 import subprocess
+import paramiko
+import time
 
-MODES = ['sim', 'real', 'onboard']
+MODES = ['sim', 'real', 'onboard', 'labonboard']
 TYPES = ['tb3', 'minirover', 'bullet']
 ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'mr2']
 TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
-LAUNCH_TYPES = ['bringup', 'stage_2', 'rviz']
 
 class Bru(object):
     def __init__(self):
@@ -95,6 +98,9 @@ class Bru(object):
         elif self.cfg["BRU_MODE"] == "onboard":
             self.cfg["ROS_IP"] = self.my_vpn_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
+        elif self.cfg["BRU_MODE"] == "labonboard":
+            self.cfg["ROS_IP"] = self.my_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
         else:
             click.echo("*** bug in bru.py calc_ip")
 
@@ -109,16 +115,51 @@ class Bru(object):
         click.echo(cmd2_out)
 
     # Launch commands maps a set of ('mode', 'robot type', 'launch command' to a launch string)
-    LAUNCH_MAP = { ('onboard', 'minirover', 'bringup'): "roslaunch minirover mr_bru_bringup.launch lidar:={0} camera:={1} joy:={3}",
-                ('real', 'minirover', 'rviz'): "roslaunch minirover mr_bru_rviz.launch desc:={2} gmapping:={4}" }
+    SUBCOMMAND_DISPATCH = { 
+        ("bringup", "real", "minirover"): "roslaunch minirover mr_bru_bringup.launch lidar:={0} camera:={1} joy:={3}",
+        ("kill", "real", "minirover"): "rosnode kill -a",
+        ("status", "real", "minirover"): "rostopic list"}
 
-    def launch(self, launch_name, lidar, camera, desc, joy, gmapping):
-        click.echo("Launching...{}: lidar: {}, camera: {}, desc: {}".format(launch_name, lidar, camera, desc))
-        launch_pattern = (self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"], launch_name)
-        if launch_pattern in Bru.LAUNCH_MAP:
-            click.echo(Bru.LAUNCH_MAP[launch_pattern].format(lidar, camera, desc, joy, gmapping))
+    def remote(self, command, lidar, camera, desc, joy):
+        click.echo("Launching...{}: lidar: {}, camera: {}, joy: {}, desc: {}".format(command, lidar, camera, joy, desc))
+        dispatch_pattern = (command, self.cfg["BRU_MODE"], self.cfg["BRU_TYPE"])
+
+        if dispatch_pattern in Bru.SUBCOMMAND_DISPATCH:
+            self.sshp(Bru.SUBCOMMAND_DISPATCH[dispatch_pattern].format(lidar, camera, desc, joy), 10)
         else:
-            click.echo('That launch option is not available')
+            click.echo('BUG: That launch option is not available')
+    
+    def ssh(self, command_line):
+        ssh_cmd = ["ssh", "pi@" + self.cfg["BRU_MASTER_IP"], command_line]
+        click.echo(ssh_cmd)
+        click.echo("1")
+        #cmd1 = subprocess.Popen(" ".join(ssh_cmd), shell=True, stdout=subprocess.PIPE)
+        #completed_process = subprocess.run(" ".join(ssh_cmd), shell=True, capture_output=True, text=True)
+        completed_process = subprocess.Popen(" ".join(ssh_cmd), shell=True, stdout=subprocess.PIPE)
+        click.echo("2")
+        #completed_process.communicate()
+        click.echo("2a")
+        #cmd1_out = completed_process.stdout.read()
+        click.echo(completed_process.stdout.read())
+        click.echo("3")
+
+    def sshp(self, command_line, sleep):
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_client.load_system_host_keys()
+        ssh_client.connect(hostname=self.cfg["BRU_MASTER_IP"],
+                    username='pi',
+                    password='ROSlab134')
+        stdin, stdout, stderr = ssh_client.exec_command(command_line, timeout=sleep)
+        out = stdout.read().decode().strip()
+        error = stderr.read().decode().strip()
+        if error:
+            raise Exception('There was an error pulling the runtime: {}'.format(error))
+        else:
+            print(out)
+        ssh_client.close()
+
+
 
 
 @click.group(help="Brandeis Robotics utilities. Configure for different kinds of robots.")
@@ -165,21 +206,19 @@ def name(bru, list, name, master_ip):
     else:
         bru.set_robot(name, master_ip)
 
-@cli.command(help="Launch ROS packages. This will customize and run a launch file based on your current configuration.")
+ROBOT_SUBCOMMANDS = ['bringup', 'kill', 'status']
+
+@cli.command(help="Control the attached robot remotely")
 @click.option('--list', '-l', help='list available options', flag_value='list')
 @click.option('--camera/--nocamera', default=True)
 @click.option('--lidar/--nolidar', default=True)
 @click.option('--desc/--nodesc', default=True)
-@click.option('--joy/--nojoy', default=False)
-@click.option('--gmapping/--nogmapping', default=False)
-@click.argument('launch', type=click.Choice(LAUNCH_TYPES), required=False)
+@click.option('--joy/--nojoy', default=True)
+@click.argument('command', type=click.Choice(ROBOT_SUBCOMMANDS), required=True)
 @click.pass_obj
-def launch(bru, launch, list, lidar, camera, desc, joy, gmapping):
-    if (list or launch == None):
-        click.echo("# Available launches options: ")
-        [click.echo("{0}".format(lt)) for lt in LAUNCH_TYPES]
-    else:
-        bru.launch(launch, lidar, camera, desc, joy, gmapping)
+
+def robot(bru, command, list, lidar, camera, desc, joy):
+    bru.remote(command, lidar, camera, desc, joy)
 
 if __name__ == '__main__':
     cli()
