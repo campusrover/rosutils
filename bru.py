@@ -34,8 +34,8 @@ import time
 
 MODES = ['sim', 'real', 'onboard', 'labonboard']
 TYPES = ['tb3', 'minirover', 'bullet']
-ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'mr2']
-TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
+ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'august', 'mr2'], 
+TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover', 'august':'minirover'}
 
 class Bru(object):
     def __init__(self):
