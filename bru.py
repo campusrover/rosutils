@@ -5,7 +5,20 @@ BRU: working with robots from the Brandeis Robotics Lab
 
 $ BRU [command] [subcommand] [-arguments]
 
-All commands and subcommands can be abbreviated to a single letter
+All commands and subcommands can be abbreviated to a single letter. The goal of this tool is, 
+to the extent possible, unify commands for controlling all the different robots we have. 
+
+Each Robot has a name and a type. The names are found in the ROBOTS array and the types are in the TYPES array.
+Mapping of a robot to a type can be found in the TYPE_MAP dict.
+
+Setting a mode controls how ROS_MASTER_URI and ROS_IP are set. There are the following modes:
+    sim - in the web environment, running with a simulated robot
+    real - in the web environment, running with a real robot
+    onboard - in the physical robot, using vpn IP
+    labonboard - in the physical robot, using non-vpn IP
+
+In order to be able to modify environment variables, bru commands must be invoked as follows:
+`eval $(bru arg arg arg)`
 
 COMMANDS:
 
@@ -24,7 +37,6 @@ Something like this but specifics vary depending on where you are installing
 Install click library, see: https://click.palletsprojects.com/en/7.x/quickstart/#virtualenv
 $ ln -s /my_ros_data/rosutils/bru.py /usr/local/bin/bru
 $ ~/rosutils$ chmod +x bru.py 
-
 """
 import click
 import os
@@ -49,9 +61,9 @@ class Bru(object):
 
     def get_env_variables(self):
         config = {}
-        self.append_env_value(config, "BRU_TYPE", "minirover")
-        self.append_env_value(config, "BRU_MODE", "real")
-        self.append_env_value(config, "BRU_NAME", "pitosalas")
+        self.append_env_value(config, "BRU_TYPE", "invalid")
+        self.append_env_value(config, "BRU_MODE", "invalid")
+        self.append_env_value(config, "BRU_NAME", "invalid")
         self.append_env_value(config, "BRU_MY_IP", "invalid")
         self.append_env_value(config, "BRU_MASTER_IP", "invalid")
         self.append_env_value(config, "BRU_VPN_IP", "invalid")
@@ -158,8 +170,6 @@ class Bru(object):
         else:
             print(out)
         ssh_client.close()
-
-
 
 
 @click.group(help="Brandeis Robotics utilities. Configure for different kinds of robots.")
