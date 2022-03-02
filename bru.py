@@ -33,9 +33,9 @@ import paramiko
 import time
 
 MODES = ['sim', 'real', 'onboard', 'labonboard']
-TYPES = ['tb3', 'minirover', 'bullet']
-ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'mr2']
-TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
+TYPES = ['tb3', 'minirover', 'bullet', 'cat']
+ROBOTS = ['pitosalas', 'bullet1', 'robc', 'mr1', 'mr2', 'cat1']
+TYPE_MAP = {'pitosalas':'minirover', 'bullet1':'bullet', 'cat1':'cat', 'robc' : 'tb3', 'mr1': 'minirover', 'mr2' : 'minirover'}
 
 class Bru(object):
     def __init__(self):
