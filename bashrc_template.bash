@@ -11,8 +11,14 @@ source ~/catkin_ws/devel/setup.bash
 export BRU_MY_IP=$(myip)
 export BRU_VPN_IP=$(myvpnip)
 
+# Setting for simulation mode
 $(bru mode sim)
 $(bru name <name> -m $(myvpnip))
+
+# Settings for a physical robot 
+# $(bru mode real)
+# $(bru name <name> -m <robots vpn ip>)
+
 
 # Support for Linorobot
 export LINOLIDAR="2wd"
