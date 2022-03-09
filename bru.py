@@ -48,6 +48,7 @@ MODES = ["sim", "real", "onboard", "labonboard"]
 TYPES = ["tb3", "minirover", "bullet", "cat"]
 ROBOTS = [
     "pitosalas",
+    "cat1",
     "bullet1",
     "cat1",
     "robc",
