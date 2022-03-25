@@ -50,6 +50,7 @@ ROBOTS = [
     "pitosalas",
     "cat1",
     "bullet1",
+    "cat1",
     "robc",
     "roba",
     "robb",
