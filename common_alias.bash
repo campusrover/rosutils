@@ -30,6 +30,8 @@ alias eduroam='nmcli connection up eduroam --ask'
 alias cmsingle='catkin_make --only-pkg-with-deps'
 alias cmall='catkin_make -DCATKIN_WHITELIST_PACKAGES=""'
 alias cameraon='roslaunch raspicam_node camerav2_1280x960_10fps.launch'
+alias real='$(bru mode real)'
+alias sim='$(bru mode sim)'
 
 # Prompt
 
