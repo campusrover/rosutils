@@ -45,7 +45,7 @@ import paramiko
 import time
 
 MODES = ["sim", "real", "onboard", "labonboard"]
-TYPES = ["tb3", "minirover", "bullet", "cat", "cube"]
+TYPES = ["tb3", "minirover", "bullet", "cat", "cube", "platform"]
 ROBOTS = [
     "pitosalas",
     "cat1",
@@ -59,7 +59,8 @@ ROBOTS = [
     "august",
     "mr2",
     "alien",
-    "mutant"
+    "mutant",
+    "platform1"
 ]
 TYPE_MAP = {
     "pitosalas": "minirover",
@@ -72,7 +73,8 @@ TYPE_MAP = {
     "robc": "tb3",
     "rafael": "tb3",
     "cat1": "cat",
-    "alien":"cube"
+    "alien":"cube",
+    "platform1": "platform"
 }
 
 
