@@ -13,7 +13,7 @@ export BRU_VPN_IP=$(myvpnip)
 
 # Setting for simulation mode
 $(bru mode sim)
-$(bru name bullet1 -m $(myvpnip))
+$(bru name roba -m $(myvpnip))
 
 # Settings for a physical robot 
 # $(bru mode real)
