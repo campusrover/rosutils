@@ -77,6 +77,7 @@ TYPE_MAP = {
     "donatello": "tb3",
     "cat1": "cat",
     "alien":"cube",
+    "mutant":"cube",
     "platform1": "platform",
     "platform2": "platform"
 }
