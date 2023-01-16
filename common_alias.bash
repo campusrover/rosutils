@@ -32,6 +32,7 @@ alias cmall='catkin_make -DCATKIN_WHITELIST_PACKAGES=""'
 alias cameraon='roslaunch raspicam_node camerav2_1280x960_10fps.launch'
 alias real='$(bru mode real)'
 alias sim='$(bru mode sim)'
+alias bringup='roslaunch turtlebot3_bringup turtlebot3_robot.launch'
 
 # Prompt
 
