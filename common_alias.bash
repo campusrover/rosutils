@@ -32,8 +32,9 @@ alias cmall='catkin_make -DCATKIN_WHITELIST_PACKAGES=""'
 alias cameraon='roslaunch raspicam_node camerav2_1280x960_10fps.launch'
 alias real='$(bru mode real)'
 alias sim='$(bru mode sim)'
-alias bringup='roslaunch turtlebot3_bringup turtlebot3_robot.launch' # Will be 'roslaunch platform full_bringup.launch' if platform robot
 alias sshrobot='ssh ubuntu@$BRU_MASTER_IP'
+alias bringup='roslaunch turtlebot3_bringup turtlebot3_robot.launch' # Will be 'roslaunch platform full_bringup.launch' if platform robot
+
 # Prompt
 
 PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
