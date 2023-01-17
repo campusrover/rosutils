@@ -269,7 +269,7 @@ def mode(bru, list, name):
 
 @cli.command(help="Set name of Robot")
 @click.option("--list", "-l", help="list available options", is_flag=True)
-@click.option("--master_ip", "-m", prompt=True, help="vpn ip address of robot")
+@click.option("--master_ip", "-m", default=None, help="vpn ip address of robot")
 @click.argument("name", type=click.Choice(ROBOTS))
 @click.pass_obj
 def name(bru, list, name, master_ip):
