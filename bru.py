@@ -88,6 +88,7 @@ class Bru(object):
         self.get_env_variables()
         self.my_ip = os.environ.get("BRU_MY_IP")
         self.my_vpn_ip = os.environ.get("BRU_VPN_IP")
+        self.my_rob_ip = None
         if not all([self.my_vpn_ip, self.my_ip]):
             click.echo(
                 "You have to set up the two environment variables BRU_MY_IP and BRU_VPN_IP"
@@ -120,18 +121,12 @@ class Bru(object):
         {click.echo("export {0}={1}".format(k, v)) for (k, v) in self.cfg.items()}
 
     def set_robot(self, name, master_ip):
-        if master_ip:
-            self.cfg["BRU_NAME"] = name
-            self.cfg["BRU_TYPE"] = TYPE_MAP[name]
-            self.cfg["BRU_MASTER_IP"] = master_ip
-            self.calc_ip()
-            self.export_env()
-        else:
-            self.cfg["BRU_NAME"] = name
-            self.cfg["BRU_TYPE"] = TYPE_MAP[name]
-            self.calc_ip()
-            self.cfg["BRU_MASTER_IP"] = self.cfg["ROS_IP"]
-            self.export_env()
+        self.cfg["BRU_NAME"] = name
+        self.cfg["BRU_TYPE"] = TYPE_MAP[name]
+        self.cfg["BRU_MASTER_IP"] = master_ip
+        self.my_rob_ip = master_ip
+        self.calc_ip()
+        self.export_env()
 
     def echo_status(self):
         click.echo("# Current bru status")
@@ -148,10 +143,8 @@ class Bru(object):
             self.cfg["ROS_IP"] = self.my_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
         elif self.cfg["BRU_MODE"] == "real":
-            master_ip = subprocess.run([f"tailscale status | grep {self.cfg['BRU_NAME']}"], stdout=subprocess.PIPE, shell=True)
-            master_ip = str(master_ip.stdout).split()[2]
-            self.cfg["ROS_IP"] = master_ip
-            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(master_ip)
+            self.cfg["ROS_IP"] = self.my_rob_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_rob_ip)
         elif self.cfg["BRU_MODE"] == "onboard":
             self.cfg["ROS_IP"] = self.my_vpn_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
