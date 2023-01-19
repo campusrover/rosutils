@@ -2,38 +2,28 @@
 
 """
 BRU: working with robots from the Brandeis Robotics Lab
-
 $ BRU [command] [subcommand] [-arguments]
-
 All commands and subcommands can be abbreviated to a single letter. The goal of this tool is, 
 to the extent possible, unify commands for controlling all the different robots we have. 
-
 Each Robot has a name and a type. The names are found in the ROBOTS array and the types are in the TYPES array.
 Mapping of a robot to a type can be found in the TYPE_MAP dict.
-
 Setting a mode controls how ROS_MASTER_URI and ROS_IP are set. There are the following modes:
     sim - in the web environment, running with a simulated robot
     real - in the web environment, running with a real robot
     onboard - in the physical robot, using vpn IP
     labonboard - in the physical robot, using non-vpn IP
-
 In order to be able to modify environment variables, bru commands must be invoked as follows:
 `eval $(bru arg arg arg)`
-
 COMMANDS:
-
 s[tatus] - show the current bru settings
 e[vironment] - display all environment variables
 n[ame] - set the robot name
 m[ode] - set mode, from real, sim and oboard
 r[obot] - control a robot remotely
-
 ARGUMENTS
 -l - list
-
 INSTALLATION
 Something like this but specifics vary depending on where you are installing
-
 Install click library, see: https://click.palletsprojects.com/en/7.x/quickstart/#virtualenv
 $ ln -s /my_ros_data/rosutils/bru.py /usr/local/bin/bru
 $ ~/rosutils$ chmod +x bru.py 
@@ -88,7 +78,6 @@ class Bru(object):
         self.get_env_variables()
         self.my_ip = os.environ.get("BRU_MY_IP")
         self.my_vpn_ip = os.environ.get("BRU_VPN_IP")
-        self.my_rob_ip = None
         if not all([self.my_vpn_ip, self.my_ip]):
             click.echo(
                 "You have to set up the two environment variables BRU_MY_IP and BRU_VPN_IP"
@@ -124,7 +113,6 @@ class Bru(object):
         self.cfg["BRU_NAME"] = name
         self.cfg["BRU_TYPE"] = TYPE_MAP[name]
         self.cfg["BRU_MASTER_IP"] = master_ip
-        self.my_rob_ip = master_ip
         self.calc_ip()
         self.export_env()
 
@@ -143,8 +131,10 @@ class Bru(object):
             self.cfg["ROS_IP"] = self.my_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
         elif self.cfg["BRU_MODE"] == "real":
-            self.cfg["ROS_IP"] = self.my_rob_ip
-            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_rob_ip)
+            self.cfg["ROS_IP"] = self.my_vpn_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(
+                self.cfg["BRU_MASTER_IP"]
+            )
         elif self.cfg["BRU_MODE"] == "onboard":
             self.cfg["ROS_IP"] = self.my_vpn_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
@@ -269,7 +259,7 @@ def mode(bru, list, name):
 
 @cli.command(help="Set name of Robot")
 @click.option("--list", "-l", help="list available options", is_flag=True)
-@click.option("--master_ip", "-m", default=None, help="vpn ip address of robot")
+@click.option("--master_ip", "-m", prompt=True, help="vpn ip address of robot")
 @click.argument("name", type=click.Choice(ROBOTS))
 @click.pass_obj
 def name(bru, list, name, master_ip):
