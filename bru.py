@@ -70,7 +70,7 @@ TYPE_MAP = {
     "alien":"cube",
     "mutant":"cube",
     "platform1": "platform",
-    "platform2": "platform"
+    "platform2": "platform",
     "doc": "pupper"
 }
 
