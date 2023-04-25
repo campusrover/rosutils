@@ -2,38 +2,28 @@
 
 """
 BRU: working with robots from the Brandeis Robotics Lab
-
 $ BRU [command] [subcommand] [-arguments]
-
 All commands and subcommands can be abbreviated to a single letter. The goal of this tool is, 
 to the extent possible, unify commands for controlling all the different robots we have. 
-
 Each Robot has a name and a type. The names are found in the ROBOTS array and the types are in the TYPES array.
 Mapping of a robot to a type can be found in the TYPE_MAP dict.
-
 Setting a mode controls how ROS_MASTER_URI and ROS_IP are set. There are the following modes:
     sim - in the web environment, running with a simulated robot
     real - in the web environment, running with a real robot
     onboard - in the physical robot, using vpn IP
     labonboard - in the physical robot, using non-vpn IP
-
 In order to be able to modify environment variables, bru commands must be invoked as follows:
 `eval $(bru arg arg arg)`
-
 COMMANDS:
-
 s[tatus] - show the current bru settings
 e[vironment] - display all environment variables
 n[ame] - set the robot name
 m[ode] - set mode, from real, sim and oboard
 r[obot] - control a robot remotely
-
 ARGUMENTS
 -l - list
-
 INSTALLATION
 Something like this but specifics vary depending on where you are installing
-
 Install click library, see: https://click.palletsprojects.com/en/7.x/quickstart/#virtualenv
 $ ln -s /my_ros_data/rosutils/bru.py /usr/local/bin/bru
 $ ~/rosutils$ chmod +x bru.py 
@@ -45,7 +35,7 @@ import paramiko
 import time
 
 MODES = ["sim", "real", "onboard", "labonboard"]
-TYPES = ["tb3", "minirover", "bullet", "cat", "cube", "platform"]
+TYPES = ["tb3", "minirover", "bullet", "cat", "cube", "platform", "pupper"]
 ROBOTS = [
     "pitosalas",
     "cat1",
@@ -63,8 +53,13 @@ ROBOTS = [
     "mutant",
     "platform1",
     "platform2",
+<<<<<<< HEAD
     "platform3",
     "platform4",
+=======
+    "doc",
+    "vnc"
+>>>>>>> f2dbfc18decec5d11556ed9c02c0e7ec15bba394
 ]
 TYPE_MAP = {
     "pitosalas": "minirover",
@@ -81,7 +76,9 @@ TYPE_MAP = {
     "alien":"cube",
     "mutant":"cube",
     "platform1": "platform",
-    "platform2": "platform"
+    "platform2": "platform",
+    "doc": "pupper",
+    "vnc": "vnc"
 }
 
 
