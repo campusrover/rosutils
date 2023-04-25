@@ -62,7 +62,9 @@ ROBOTS = [
     "alien",
     "mutant",
     "platform1",
-    "platform2"
+    "platform2",
+    "platform3",
+    "platform4",
 ]
 TYPE_MAP = {
     "pitosalas": "minirover",
