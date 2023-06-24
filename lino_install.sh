@@ -51,6 +51,8 @@ sudo apt install ros-noetic-camera-info-manager
 sudo apt install libraspberrypi-dev libraspberrypi0
 sudo apt install libraspberrypi-bin
 sudo apt-get install ros-noetic-teleop-twist-keyboard
+sudo apt-get install ros-noetic-joy
+sudo apt-get install bluetooth bluez blueman
 
 cd ~/linorobot_ws/src
 git clone https://github.com/EAIBOT/ydlidar.git
