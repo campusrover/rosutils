@@ -37,5 +37,7 @@ alias bringup='roslaunch turtlebot3_bringup turtlebot3_robot.launch' # Will be '
 alias sshpupper='ssh pi@$BRU_MASTER_IP'
 alias multibringup='roslaunch turtlebot3_bringup turtlebot3_multi_robot.launch'
 # Prompt
+alias pio-upload="source ~/rosutils/install/pio-upload.sh"
+alias pio-compile="source ~/rosutils/install/pio-compile.sh"
 
 PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
