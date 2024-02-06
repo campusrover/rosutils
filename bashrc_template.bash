@@ -23,3 +23,6 @@ $(bru name roba -m $(myvpnip))
 # Support for Linorobot
 export LINOLIDAR="2wd"
 export LINOBASE="ydlidar"
+
+# Final Setup
+sudo ~/rosutils/install set_hostname ***fill in hostname***

@@ -14,7 +14,6 @@ alias cu='cd ~/rosutils'
 alias cu='cd ~/rosutils'
 alias eb='nano ~/.bashrc'
 alias gazempty='roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch'
-alias gp='git pull'
 alias gs='git status'
 alias l='ls -CF'
 alias la='ls -A'
@@ -46,3 +45,14 @@ PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
 source ~/rosutils/publish_arm_command.sh
 alias armcmd='publish_arm_command'
 
+# Git push with zero or more params
+alias gp='if [ $# -eq 0 ]; \
+          then git add --all; \
+               git commit -m "work in progress"; \
+               git push; \
+          else MSG=$*; \
+               git add --all; \
+               
+               git commit -m "$MSG"; \
+               git push; \
+          fi'
