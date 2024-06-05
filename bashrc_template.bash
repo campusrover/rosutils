@@ -25,4 +25,4 @@ export LINOLIDAR="2wd"
 export LINOBASE="ydlidar"
 
 # Final Setup
-sudo ~/rosutils/install set_hostname ***fill in hostname***
+# sudo ~/rosutils/install set_hostname ***fill in hostname***
