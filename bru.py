@@ -55,8 +55,7 @@ ROBOTS = [
     "platform2",
     "platform3",
     "platform4",
-    "doc",
-    "vnc"
+    "sim"
 ]
 TYPE_MAP = {
     "pitosalas": "minirover",
