@@ -76,7 +76,8 @@ TYPE_MAP = {
     "platform3": "platform",
     "platform4": "platform",
     "doc": "pupper",
-    "vnc": "vnc"
+    "vnc": "vnc",
+    "sim": "tb3"
 }
 
 
