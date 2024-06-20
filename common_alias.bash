@@ -1,7 +1,6 @@
 #!/bin/bash
 echo "[running common_alias.bash]"
 
-
 # Bash Functions
 robotip() { nslookup "$1" >/dev/null | awk '/Address/&&!/#/{print $2}';  }
 stopnow() { rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: { x: 0.0,  y: 0.0,  z: 0.0 }, angular: { x: 0.0,  y: 0.0, z: 0.0 } } ';  }
@@ -15,7 +14,6 @@ alias cu='cd ~/rosutils'
 alias cu='cd ~/rosutils'
 alias eb='nano ~/.bashrc'
 alias gazempty='roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch'
-alias gp='git pull'
 alias gs='git status'
 alias l='ls -CF'
 alias la='ls -A'
@@ -37,5 +35,24 @@ alias bringup='roslaunch turtlebot3_bringup turtlebot3_robot.launch' # Will be '
 alias sshpupper='ssh pi@$BRU_MASTER_IP'
 alias multibringup='roslaunch turtlebot3_bringup turtlebot3_multi_robot.launch'
 # Prompt
+alias pio-upload="source ~/rosutils/install/pio-upload.sh"
+alias pio-compile="source ~/rosutils/install/pio-compile.sh"
+alias ros-stage_3="source ~/rosutils/install/ros-stage_3.sh"
 
 PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
+
+# More complicated commands
+source ~/rosutils/publish_arm_command.sh
+alias armcmd='publish_arm_command'
+
+# Git push with zero or more params
+alias gp='if [ $# -eq 0 ]; \
+          then git add --all; \
+               git commit -m "work in progress"; \
+               git push; \
+          else MSG=$*; \
+               git add --all; \
+               
+               git commit -m "$MSG"; \
+               git push; \
+          fi'

@@ -51,12 +51,11 @@ ROBOTS = [
     "mr2",
     "alien",
     "mutant",
-    "platform1",
-    "platform2",
-    "platform3",
-    "platform4",
-    "doc",
-    "vnc"
+    "plat1",
+    "plat2",
+    "plat3",
+    "plat4",
+    "sim"
 ]
 TYPE_MAP = {
     "pitosalas": "minirover",
@@ -72,12 +71,13 @@ TYPE_MAP = {
     "cat1": "cat",
     "alien":"cube",
     "mutant":"cube",
-    "platform1": "platform",
-    "platform2": "platform",
-    "platform3": "platform",
-    "platform4": "platform",
+    "plat1": "platform",
+    "plat2": "platform",
+    "plat3": "platform",
+    "plat4": "platform",
     "doc": "pupper",
-    "vnc": "vnc"
+    "vnc": "vnc",
+    "sim": "tb3"
 }
 
 
