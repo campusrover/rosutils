@@ -78,7 +78,7 @@ TYPE_MAP = {
     "plat3": "platform",
     "plat4": "platform",
     "bran1": "branbot",
-    "bran2": "branbot,"
+    "bran2": "branbot",
     "doc": "pupper",
     "vnc": "vnc",
     "sim": "tb3"
