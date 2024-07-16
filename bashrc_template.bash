@@ -38,5 +38,5 @@ $(bru name sim -m $(myvpnip))
 
 
 # Support for Linorobot
-export LINOLIDAR="2wd"
-export LINOBASE="ydlidar"
+export LINOBASE="2wd"
+export LINOLIDAR="ydlidar"
