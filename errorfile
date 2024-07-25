@@ -1,0 +1,7 @@
+Get:1 https://pkgs.tailscale.com/stable/ubuntu focal InRelease
+Hit:2 http://ports.ubuntu.com/ubuntu-ports focal InRelease
+Get:3 http://packages.ros.org/ros/ubuntu focal InRelease [4679 B]
+Hit:4 http://ports.ubuntu.com/ubuntu-ports focal-backports InRelease
+Get:5 http://ports.ubuntu.com/ubuntu-ports focal-updates InRelease [128 kB]
+Get:6 http://ports.ubuntu.com/ubuntu-ports focal-security InRelease [128 kB]
+Reading package lists...
