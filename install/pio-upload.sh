@@ -4,7 +4,7 @@ original_dir=$(pwd)
 
 cw
 roscd linorobot/teensy/firmware
-platformio run --target upload -e teensy40
+platformio run --target upload -e firmware40
 
 # Return to the original directory
 cd "$original_dir"
