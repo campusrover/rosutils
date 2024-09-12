@@ -14,4 +14,4 @@ eval "$(ssh-agent -s)"
 ssh-add "$KEY_PATH"
 
 echo "SSH key created and added to the agent."
-cat "$KEY_PATH.ssh"
+cat "$KEY_PATH.pub"
