@@ -11,7 +11,7 @@
 # sudo ./pi_connect.sh tskey-auth-k5ZaDLVzqv11CNTRL-6Fq1ufUoEWJ4sL3SpwxZUJmGemLxbWdAh
 
 # New Tag, Reusable, Not ephemeral, with tag
-# sudo ./pi_connect.sh tskey-auth-kYZ7CfvdzV11CNTRL-e5hoNfoaRFJaCV5Ubf8eMJveb7CU7Fz5E
+sudo ./pi_connect.sh tskey-auth-kYZ7CfvdzV11CNTRL-e5hoNfoaRFJaCV5Ubf8eMJveb7CU7Fz5E
 
 # Nerw Tag, Reusable, Not Ephermeral, with tag, non-expiring
-sudo ./pi_connect.sh tskey-client-kXMxBL9cPA21CNTRL-sEMrTxSN9KPXoJm75msKNPbzjHbNCJxWD
+#sudo ./pi_connect.sh tskey-client-kXMxBL9cPA21CNTRL-sEMrTxSN9KPXoJm75msKNPbzjHbNCJxWD
