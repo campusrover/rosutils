@@ -57,6 +57,7 @@ ROBOTS = [
     "plat4",
     "bran1",
     "bran2",
+    "bran3",
     "sim"
 ]
 TYPE_MAP = {
@@ -79,6 +80,7 @@ TYPE_MAP = {
     "plat4": "platform",
     "bran1": "branbot",
     "bran2": "branbot",
+    "bran3": "branrobot",
     "doc": "pupper",
     "vnc": "vnc",
     "sim": "tb3"

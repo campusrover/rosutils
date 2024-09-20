@@ -1,7 +1,4 @@
 #!/bin/bash
-export k1="tskey-auth-k37QNpiUmv11CNTRL-nF14ZpayUE3v4qdVd7a9G3v2XWG14xbg"
-export k2="tskey-auth-kbFN4FNXLw11CNTRL-yPZywKcZBuRwZRXPm4uqkRnZxHLerqBN"
-
 set -e
 
 infof=`tput setaf 6`
@@ -47,7 +44,7 @@ fi
 
 if [ -n "$1" ]; then
   echo -ne "${infof}  Connecting... Might takes up to 5 minutes \r${reset}"
-  sudo tailscale up --authkey=$1 --accept-routes 2>&1
+  sudo tailscale up --authkey=$1 --accept-routes --advertise-tags tag:robot 2>&1
 
   addr=`ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}'`
   if [ -n "${addr}" ]; then
