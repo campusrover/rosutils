@@ -3,7 +3,7 @@ echo "[running common_alias.bash]"
 
 # Bash Functions
 robotip() { nslookup "$1" >/dev/null | awk '/Address/&&!/#/{print $2}';  }
-stopnow() { rostopic pub /cmd_vel geometry_msgs/Twist '{ linear: { x: 0.0,  y: 0.0,  z: 0.0 }, angular: { x: 0.0,  y: 0.0, z: 0.0 } } ';  }
+stopnow() { rostopic pub -1 /cmd_vel geometry_msgs/Twist '{ linear: { x: 0.0,  y: 0.0,  z: 0.0 }, angular: { x: 0.0,  y: 0.0, z: 0.0 } } ';  }
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 
@@ -24,10 +24,12 @@ alias restart='supervisorctl -u root -p dev@ros restart x:*'
 alias sb='source ~/.bashrc'
 alias settime='sudo ntpdate ntp.ubuntu.com'
 alias teleop='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch'
-alias eduroam='nmcli connection up eduroam --ask'
 alias cmsingle='catkin_make --only-pkg-with-deps'
 alias cmall='catkin_make -DCATKIN_WHITELIST_PACKAGES=""'
 alias cameraon='roslaunch raspicam_node camerav2_1280x960_10fps.launch'
+alias reboot='sudo shutdown -r now'
+alias poweroff='sudo shutdown now'
+alias gitkey='eval "$(ssh-agent -s)";ssh-add "/root/.ssh/cluster"'
 
 # Alias for online Tailscale nodes
 alias tson='tailscale status --json | jq -r '\''.Peer[] | select(.Online) | .DNSName |= (.[:-1] | split("-clouddesktop")[0]) | .TailscaleIPs[0] as $ip | .DNSName + " - " + $ip'\'''
@@ -40,9 +42,8 @@ alias real='$(bru mode real)'
 alias sim='$(bru mode sim)'
 alias sshrobot='ssh ubuntu@$BRU_MASTER_IP'
 alias bringup='roslaunch turtlebot3_bringup turtlebot3_robot.launch' # Will be 'roslaunch platform full_bringup.launch' if platform robot
-alias sshpupper='ssh pi@$BRU_MASTER_IP'
+
 alias multibringup='roslaunch turtlebot3_bringup turtlebot3_multi_robot.launch'
-# Prompt
 alias pio-upload="source ~/rosutils/install/pio-upload.sh"
 alias pio-compile="source ~/rosutils/install/pio-compile.sh"
 alias ros-stage_3="source ~/rosutils/install/ros-stage_3.sh"
