@@ -8,4 +8,7 @@
 # sudo ./pi_connect.sh tskey-auth-khBD9dUA1y11CNTRL-4yFyAU87wTDYrKCUP7bGSDWRYCEcCmTd
 
 # Ephemeral and reusable Sept 27
-sudo ./pi_connect.sh tskey-auth-k5ZaDLVzqv11CNTRL-6Fq1ufUoEWJ4sL3SpwxZUJmGemLxbWdAh
+# sudo ./pi_connect.sh tskey-auth-k5ZaDLVzqv11CNTRL-6Fq1ufUoEWJ4sL3SpwxZUJmGemLxbWdAh
+
+# New Tag, Reusable, Not ephemeral, with tag
+sudo ./pi_connect.sh tskey-auth-kYZ7CfvdzV11CNTRL-e5hoNfoaRFJaCV5Ubf8eMJveb7CU7Fz5E
