@@ -4,7 +4,7 @@
 # sudo ./pi_connect.sh tskey-auth-kE9VK7U7eP11CNTRL-VMC2ti74H5ZbVbiQ3dn4yYZ1sQDLJ6gm
 # sudo ./pi_connect.sh tskey-auth-kpz6CCGnxi11CNTRL-wzDkQZ69rUJhvoGnR5DVTJRiM5mzfBeUE
 
-# New Sept 27 Ephemeral and 
+# New Sept 27 Ephemeral and
 # sudo ./pi_connect.sh tskey-auth-khBD9dUA1y11CNTRL-4yFyAU87wTDYrKCUP7bGSDWRYCEcCmTd
 
 # Ephemeral and reusable Sept 27
