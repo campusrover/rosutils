@@ -14,4 +14,6 @@
 # sudo ./pi_connect.sh tskey-auth-kYZ7CfvdzV11CNTRL-e5hoNfoaRFJaCV5Ubf8eMJveb7CU7Fz5E
 
 # Nerw Tag, Reusable, Not Ephermeral, with tag, non-expiring
-sudo ./pi_connect.sh tskey-client-kXMxBL9cPA21CNTRL-sEMrTxSN9KPXoJm75msKNPbzjHbNCJxWD
+# sudo ./pi_connect.sh tskey-client-kXMxBL9cPA21CNTRL-sEMrTxSN9KPXoJm75msKNPbzjHbNCJxWD
+
+sudo ./pi_connect tskey-auth-kEUvDJghmR11CNTRL-f2xwmoWHobNjDtHaJZx8kNvUNzJ83MBrN
