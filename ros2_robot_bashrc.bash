@@ -9,7 +9,7 @@ source ~/rosutils/ros2_common_bashrc.bash
 
 export ROS_DOMAIN_ID=5
 export LINOROBOT2_BASE=2wd
-export LINOROBOT2_LASER_SENSOR=a1
+export LINOROBOT2_LASER_SENSOR=
 export LINOROBOT2_DEPTH_SENSOR=
 
 source $HOME/linorobot2_ws/install/setup.bash
