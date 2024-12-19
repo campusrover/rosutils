@@ -13,6 +13,6 @@ export LINOROBOT2_LASER_SENSOR=a1
 export LINOROBOT2_DEPTH_SENSOR=
 
 source $HOME/linorobot2_ws/install/setup.bash
-alias bringup=ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0 --baudrate 921600
+alias bringup="ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0 --baudrate 921600"
 
 
