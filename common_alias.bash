@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[running common_alias.bash]"
+echo "[running ~/rosutils/common_alias.bash]"
 
 # Bash Functions
 robotip() { nslookup "$1" >/dev/null | awk '/Address/&&!/#/{print $2}';  }
