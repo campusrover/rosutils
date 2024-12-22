@@ -6,13 +6,13 @@ myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 
 # Aliases
-alias cm='cd ~/ros2_ws && colcon build'
-alias cs='cd ~/ros2_ws/src'
+alias cm='cd ~/$ROS2_WS && colcon build'
+alias cs='cd ~/$ROS2_WS/src'
+alias cw='cd ~/$ROS2_WS; source ~/$ROS2_WS/install/setup.bash'
 alias gs='git status'
 alias l='ls -CF'
 alias la='ls -A'
 alias ll='ls -alF'
-alias cw='cd ~/ros2_ws; source ~/ros2_ws/install/setup.bash'
 alias restart='supervisorctl -u root -p dev@ros restart x:*'
 alias sb='source ~/.bashrc'
 alias reboot='sudo shutdown -r now'
