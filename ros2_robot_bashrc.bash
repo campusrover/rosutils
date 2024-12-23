@@ -15,6 +15,7 @@ export LINOROBOT2_DEPTH_SENSOR=
 
 export ROS2_WS=linorobot2_ws
 source ~/$ROS2_WS/install/setup.bash
+
 alias bringup="ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0 --baudrate 921600"
 alias bringuplidar="ros2 launch hls_lfcd_lds_driver hlds_laser.launch.py"
 
