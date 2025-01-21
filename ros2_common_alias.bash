@@ -6,7 +6,7 @@ myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 
 # Aliases
-alias cm='cd ~/$ROS2_WS && colcon build'
+alias cm='cd ~/$ROS2_WS && colcon build --symlink-install'
 alias cs='cd ~/$ROS2_WS/src'
 alias cw='cd ~/$ROS2_WS; source ~/$ROS2_WS/install/setup.bash'
 alias gs='git status'
