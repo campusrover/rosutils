@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[running ~/rosutils/ros2_robot_bashrc]"
+echo "[running ~/rosutils/ros2_robot_bashrc.bash]"
 
 HISTSIZE=1000
 HISTFILESIZE=2000
