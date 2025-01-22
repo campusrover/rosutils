@@ -15,5 +15,4 @@ export LINOROBOT2_DEPTH_SENSOR=
 export ROS2_WS=linorobot2_ws
 source ~/$ROS2_WS/install/setup.bash
 
-. "$HOME/.atuin/bin/env"
-eval "$(atuin init bash)"
+eval "$(mcfly init bash)"
