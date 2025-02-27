@@ -5,7 +5,7 @@ HISTFILESIZE=2000
 
 export ROS2_WS=ros2_ws
 source ~/rosutils/ros2_common_bashrc.bash
-source /opt/ros/humble/setup.bash
+source /opt/ros/jazzy/setup.bash
 
 export LINOROBOT2_BASE=2wd
 export LINOROBOT2_LASER_SENSOR=
