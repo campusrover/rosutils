@@ -18,12 +18,8 @@ alias sb='source ~/.bashrc'
 alias rb='sudo shutdown -r now'
 alias po='sudo shutdown now'
 alias sb='source ~/.bashrc'
-alias cdl2='cd ~/$ROS2_WS'
-alias cdlh='cd ~/linorobot2_hardware'
-alias cdru='cd ~/rosutils'
-alias pio-upload="source ~/rosutils/install/pio-upload.sh"
-alias pio-compile="source ~/rosutils/install/pio-compile.sh"
-alias ros-stage_3="source ~/rosutils/install/ros-stage_3.sh"
+alias ch='cd ~/linorobot2_hardware'
+alias cu='cd ~/rosutils'
 
 PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
 
