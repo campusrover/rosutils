@@ -13,17 +13,9 @@ alias l='ls -CF'
 alias la='ls -A'
 alias ll='ls -alF'
 alias cw='cd ~/ros2_ws; source ~/ros2_ws/install/setup.bash'
-alias restart='supervisorctl -u root -p dev@ros restart x:*'
 alias sb='source ~/.bashrc'
-alias reboot='sudo shutdown -r now'
-alias poweroff='sudo shutdown now'
-
-# Alias for online Tailscale nodes
-alias tson='tailscale status --json | jq -r '\''.Peer[] | select(.Online) | .DNSName |= (.[:-1] | split("-clouddesktop")[0]) | .TailscaleIPs[0] as $ip | .DNSName + " - " + $ip'\'''
-
-# Alias for offline Tailscale nodes
-alias tsoff='tailscale status --json | jq -r '\''.Peer[] | select(.Online == false) | .DNSName |= (.[:-1] | split("-clouddesktop")[0]) | .TailscaleIPs[0] as $ip | .DNSName + " - " + $ip'\'''
-
+alias rb='sudo shutdown -r now'
+alias po='sudo shutdown now'
 
 alias pio-upload="source ~/rosutils/install/pio-upload.sh"
 alias pio-compile="source ~/rosutils/install/pio-compile.sh"
