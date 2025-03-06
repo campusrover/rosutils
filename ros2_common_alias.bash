@@ -21,15 +21,6 @@ alias sb='source ~/.bashrc'
 alias cdl2='cd ~/$ROS2_WS'
 alias cdlh='cd ~/linorobot2_hardware'
 alias cdru='cd ~/rosutils'
-
-# Alias for online Tailscale nodes
-alias tson='tailscale status --json | jq -r '\''.Peer[] | select(.Online) | .DNSName |= (.[:-1] | split("-clouddesktop")[0]) | .TailscaleIPs[0] as $ip | .DNSName + " - " + $ip'\'''
-
-# Alias for offline Tailscale nodes
-alias tsoff='tailscale status --json | jq -r '\''.Peer[] | select(.Online == false) | .DNSName |= (.[:-1] | split("-clouddesktop")[0]) | .TailscaleIPs[0] as $ip | .DNSName + " - " + $ip'\'''
-
->>>>>>> 1d40ea1dfcf903cb60a223897c3fd5ec9fa81a41
-
 alias pio-upload="source ~/rosutils/install/pio-upload.sh"
 alias pio-compile="source ~/rosutils/install/pio-compile.sh"
 alias ros-stage_3="source ~/rosutils/install/ros-stage_3.sh"

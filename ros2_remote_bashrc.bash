@@ -12,3 +12,5 @@ export LINOROBOT2_LASER_SENSOR=
 export LINOROBOT2_DEPTH_SENSOR=
 
 export LIBGL_ALWAYS_SOFTWARE=1
+
+eval "$(mcfly init bash)"
