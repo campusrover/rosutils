@@ -4,7 +4,7 @@ echo "[running ~/rosutils/ros2_robot_bashrc.bash]"
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-source /opt/ros/humble/setup.bash
+source /opt/ros/jazzy/setup.bash
 source ~/rosutils/ros2_common_bashrc.bash
 
 export LINOROBOT2_BASE=2wd
