@@ -11,7 +11,6 @@ myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3
 alias cm='cd ~/catkin_ws && catkin_make'
 alias cs='cd ~/catkin_ws/src'
 alias cu='cd ~/rosutils'
-alias cu='cd ~/rosutils'
 alias eb='nano ~/.bashrc'
 alias gazempty='roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch'
 alias gs='git status'
@@ -30,6 +29,9 @@ alias cameraon='roslaunch raspicam_node camerav2_1280x960_10fps.launch'
 alias reboot='sudo shutdown -r now'
 alias poweroff='sudo shutdown now'
 alias gitkey='eval "$(ssh-agent -s)";ssh-add "/root/.ssh/cluster"'
+alias rh='cd ~/linorobot2_hardware/firmware/'
+alias rb='cd ~/linorobot2_hardware/firmware/; pio run -t upload'
+alias cb='colcon build'
 
 # Alias for online Tailscale nodes
 alias tson='tailscale status --json | jq -r '\''.Peer[] | select(.Online) | .DNSName |= (.[:-1] | split("-clouddesktop")[0]) | .TailscaleIPs[0] as $ip | .DNSName + " - " + $ip'\'''
