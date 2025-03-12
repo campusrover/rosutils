@@ -3,7 +3,7 @@ echo "[running ~/rosutils/remote_bashrc]"
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-export ROS2_WS=linorobot2_ws
+export ROS2_WS=ros22_ws
 source ~/rosutils/ros2_common_bashrc.bash
 source /opt/ros/jazzy/setup.bash
 
