@@ -22,8 +22,6 @@ alias cu='cd ~/rosutils'
 alias gu="git remote -v”
 
 
-PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
-
 # Git push with zero or more params
 alias gp='if [ $# -eq 0 ]; \
           then git add --all; \
