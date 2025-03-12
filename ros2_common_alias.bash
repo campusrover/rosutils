@@ -20,8 +20,6 @@ alias sb='source ~/.bashrc'
 alias ch='cd ~/linorobot2_hardware'
 alias cu='cd ~/rosutils'
 
-PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
-
 # Git push with zero or more params
 alias gp='if [ $# -eq 0 ]; \
           then git add --all; \
