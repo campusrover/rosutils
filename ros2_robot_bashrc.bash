@@ -16,3 +16,4 @@ export ROS2_WS=linorobot2_ws
 source ~/$ROS2_WS/install/setup.bash
 
 eval "$(mcfly init bash)"
+PATH="$PATH:$HOME/.platformio/penv/bin"
