@@ -19,6 +19,7 @@ alias po='sudo shutdown now'
 alias sb='source ~/.bashrc'
 alias ch='cd ~/linorobot2_hardware'
 alias cu='cd ~/rosutils'
+alias gu='git remote -v'
 
 PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
 
