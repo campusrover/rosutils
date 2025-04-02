@@ -20,6 +20,9 @@ alias sb='source ~/.bashrc'
 alias ch='cd ~/linorobot2_hardware'
 alias cu='cd ~/rosutils'
 alias gu="git remote -v”
+alias cb="colcon build"
+alias cbp="colcon build --packages-select "
+alias cbi="colcon build --symlink-install"
 
 
 # Git push with zero or more params
