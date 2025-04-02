@@ -6,7 +6,6 @@ myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
 myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3}' ; }
 
 # Aliases
-alias cm='cd ~/$ROS2_WS && colcon build --symlink-install'
 alias cs='cd ~/$ROS2_WS/src'
 alias cw='cd ~/$ROS2_WS; source ~/$ROS2_WS/install/setup.bash'
 alias gs='git status'
@@ -20,8 +19,10 @@ alias sb='source ~/.bashrc'
 alias ch='cd ~/linorobot2_hardware'
 alias cu='cd ~/rosutils'
 alias gu='git remote -v'
+alias cb='colcon build'
+alias cbp='colcon build --packages-select'
+alias cbi='colcon build --symlink-install'
 
-PS1="[\$BRU_MODE:\$BRU_NAME]\w$ "
 
 # Git push with zero or more params
 alias gp='if [ $# -eq 0 ]; \
