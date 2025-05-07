@@ -117,17 +117,16 @@ class Bru(object):
 
     def set_mode(self, name):
         self.cfg["BRU_MODE"] = name
-        self.calc_ip()
         self.export_env()
 
     def export_env(self):
         {click.echo("export {0}={1}".format(k, v)) for (k, v) in self.cfg.items()}
 
-    def set_robot(self, name, master_ip):
+    def set_robot(self, name, master_ip=None):
         self.cfg["BRU_NAME"] = name
         self.cfg["BRU_TYPE"] = TYPE_MAP[name]
-        self.cfg["BRU_MASTER_IP"] = master_ip
-        self.calc_ip()
+        self.set_master_ip(master_ip)
+        self.cfg["BRU_MASTER_IP"] = self.cfg["ROS_IP"]
         self.export_env()
 
     def echo_status(self):
@@ -140,23 +139,23 @@ class Bru(object):
         click.echo("ros-master-uri: {0}".format(self.cfg["ROS_MASTER_URI"]))
         click.echo("ros-ip:         {0}".format(self.cfg["ROS_IP"]))
 
-    def calc_ip(self):
+    def set_master_ip(self, master_ip):
         if self.cfg["BRU_MODE"] == "sim":
             self.cfg["ROS_IP"] = self.my_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
         elif self.cfg["BRU_MODE"] == "real":
-            self.cfg["ROS_IP"] = self.my_vpn_ip
-            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(
-                self.cfg["BRU_MASTER_IP"]
-            )
+            master_ip = subprocess.run([f"tailscale status | grep {self.cfg['BRU_NAME']}"], stdout=subprocess.PIPE, shell=True)
+            master_ip = str(master_ip.stdout).split()[2]
+            self.cfg["ROS_IP"] = master_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(master_ip)
         elif self.cfg["BRU_MODE"] == "onboard":
             self.cfg["ROS_IP"] = self.my_vpn_ip
             self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_vpn_ip)
-        elif self.cfg["BRU_MODE"] == "labonboard":
-            self.cfg["ROS_IP"] = self.my_ip
-            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(self.my_ip)
+        elif self.cfg["BRU_MODE"] == "labonboard" and master_ip:
+            self.cfg["ROS_IP"] = master_ip
+            self.cfg["ROS_MASTER_URI"] = "http://{0}:11311".format(master_ip)
         else:
-            click.echo("*** bug in bru.py calc_ip")
+            click.echo("*** bug in bru.py set_master_ip")
 
     def echo_env(self):
         click.echo("# Relevant global environment variables\n")
@@ -273,7 +272,7 @@ def mode(bru, list, name):
 
 @cli.command(help="Set name of Robot")
 @click.option("--list", "-l", help="list available options", is_flag=True)
-@click.option("--master_ip", "-m", prompt=True, help="vpn ip address of robot")
+@click.option("--master_ip", "-m", default=None, help="ip address of robot")
 @click.argument("name", type=click.Choice(ROBOTS))
 @click.pass_obj
 def name(bru, list, name, master_ip):
