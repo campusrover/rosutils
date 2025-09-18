@@ -20,6 +20,9 @@ alias cb='colcon build'
 alias cbp='colcon build --packages-select'
 alias cbi='colcon build --symlink-install'
 alias new='ls -lt | head -n 20'
+alias pio='platformio'
+alias pioupload='platformio run --target upload'
+alias pioenv='platformio run --environment'
 
 # Git push with zero or more params
 alias gp='if [ $# -eq 0 ]; \
