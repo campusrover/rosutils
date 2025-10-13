@@ -9,9 +9,6 @@ myvpnip() { ip addr show dev tailscale0 | grep -Eo '([0-9]{1,3}[\.]){3}[0-9]{1,3
 alias cs='cd ~/$ROS2_WS/src'
 alias cw='cd ~/$ROS2_WS; source ~/$ROS2_WS/install/setup.bash'
 alias gs='git status'
-alias l='ls -CF'
-alias la='ls -A'
-alias ll='ls -alF'
 alias sb='source ~/.bashrc'
 alias rb='sudo shutdown -r now'
 alias po='sudo shutdown now'
@@ -22,7 +19,10 @@ alias gu='git remote -v'
 alias cb='colcon build'
 alias cbp='colcon build --packages-select'
 alias cbi='colcon build --symlink-install'
-
+alias new='ls -lt | head -n 20'
+alias pio='platformio'
+alias pioupload='platformio run --target upload'
+alias pioenv='platformio run --environment'
 
 # Git push with zero or more params
 alias gp='if [ $# -eq 0 ]; \
