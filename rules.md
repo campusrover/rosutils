@@ -4,6 +4,10 @@
     * You shall use ROS2 and colcon builds for ROS2 programs
     * You should prefer async/await over threading when there is a choice
     * You should look for existing libraries instead of reinventing solutions
+    * You will always have a shebang line
+    * The first comment will give the name of the module and in one line say what it is
+    * The second comment will say "Author: Pito Salas and Claude Code"
+    * The third comment will say "Open Souce Under MIT license"
 
 ## Code Structure and Organization
     * You shall ensure functions and methods are no longer than 50 lines
@@ -36,6 +40,14 @@
     * You shall NEVER add write/save/update methods to ManualDataClient
     * You shall NEVER open manual_data.yaml in write or append mode
     * Only the user directly edits manual/manual_data.yaml
+
+## ROS Node Execution Policy
+    * You shall NEVER automatically run ROS nodes using tools (Bash, etc.)
+    * You shall NEVER use `ros2 run` commands in tool calls
+    * You shall NEVER start nodes in the background
+    * You shall NEVER use timeout commands to run nodes temporarily
+    * You shall provide the user with the exact command to run instead
+    * You shall let the user execute ROS nodes in their own terminal with full control
 
 
 # CURRENT.md
