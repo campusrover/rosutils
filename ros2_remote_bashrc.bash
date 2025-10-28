@@ -15,4 +15,4 @@ export LINOROBOT2_DEPTH_SENSOR=
 export LIBGL_ALWAYS_SOFTWARE=1
 
 eval "$(mcfly init bash)"
-export MCFLY_LIGHT=TRUE
+export MCFLY_LIGHT=FALSE
