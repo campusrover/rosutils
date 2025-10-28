@@ -1,6 +1,6 @@
 ## Technology and Framework Requirements
     * You shall write code in Python
-    * You shall use Python latest and standard package management (uv preferred) for non ROS2 programs
+    * You shall use Python latest and standard package management (uv) for non ROS2 programs
     * You shall use ROS2 and colcon builds for ROS2 programs
     * You should prefer async/await over threading when there is a choice
     * You should look for existing libraries instead of reinventing solutions
@@ -19,6 +19,8 @@
     * You shall avoid simple wrappers
     * You should look for code duplication and make the code DRY if it makes sense
     * You shall avoid functions with more than 3 arguments
+    * You shall use absolute imports with module aliases rather than relative imports
+    * You shall put all imports at the top of the file
 
 ## Code Quality and Best Practices
     * You shall write idiomatic Python
@@ -30,13 +32,13 @@
     * You shall undertake multi-step implementation or refactoring in a way that after each step a running program is retained so that testing can be done to ensure progress is on the right track
     * You shall not provide default parameters to functions; make the caller provide all required values explicitly
     * You shall not code defensively; let exceptions bubble up rather than handling every possible error case
+    * You shall follow YAGNI (You Aren't Gonna Need It): only add functions, methods, or classes that are explicitly required by current requirements; do not add code for anticipated future needs
 
 ## Manual Data Protection
     * You shall NEVER modify manual/manual_data.yaml under any circumstances
     * You shall NEVER add write/save/update methods to ManualDataClient
     * You shall NEVER open manual_data.yaml in write or append mode
     * Only the user directly edits manual/manual_data.yaml
-
 
 # CURRENT.md
     * Now read CURRENT.md and follow it's instructions
