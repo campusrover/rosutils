@@ -4,6 +4,10 @@
     * You shall use ROS2 and colcon builds for ROS2 programs
     * You should prefer async/await over threading when there is a choice
     * You should look for existing libraries instead of reinventing solutions
+    * You will always have a shebang line
+    * The first comment will give the name of the module and in one line say what it is
+    * The second comment will say "Author: Pito Salas and Claude Code"
+    * The third comment will say "Open Souce Under MIT license"
 
 ## Code Structure and Organization
     * You shall ensure functions and methods are no longer than 50 lines
@@ -33,12 +37,6 @@
     * You shall not provide default parameters to functions; make the caller provide all required values explicitly
     * You shall not code defensively; let exceptions bubble up rather than handling every possible error case
     * You shall follow YAGNI (You Aren't Gonna Need It): only add functions, methods, or classes that are explicitly required by current requirements; do not add code for anticipated future needs
-
-## Manual Data Protection
-    * You shall NEVER modify manual/manual_data.yaml under any circumstances
-    * You shall NEVER add write/save/update methods to ManualDataClient
-    * You shall NEVER open manual_data.yaml in write or append mode
-    * Only the user directly edits manual/manual_data.yaml
 
 # CURRENT.md
     * Now read CURRENT.md and follow it's instructions
