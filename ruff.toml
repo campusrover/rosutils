@@ -1,0 +1,45 @@
+[lint]
+select = ["ALL"]
+
+ignore = [
+  # Docstrings: Relax for internal code
+  "D100", "D101", "D102", "D103", "D104", "D107",
+  "D203", "D213",
+  "D205",          # 1 blank line required between summary and description
+  "D211",          # No blank lines before class docstring
+  "D212",          # Multi-line docstring summary should start at the first line
+  "D400",          # First line should end with a period
+  "D401",          # First line should be in imperative mood
+  "D415",          # First line should be surrounded by quotes
+
+  # Type hints: Only enforce simple signatures
+  "ANN",           # Disable all annotation rules
+
+  # ROS2 patterns
+  "T201",          # print() for diagnostics
+  "S603", "S607",  # subprocess
+  "TID252",        # relative imports
+  "EXE001",        # shebang presence (ROS2 nodes don't always need them)
+  "DTZ005",        # datetime.now() without timezone (OK for local timestamps)
+  "BLE001",        # Blind except: catch Exception for top-level error handling
+  "SIM108",        # Use ternary operator - sometimes if/else is clearer
+  "TRY003",        # Avoid specifying long messages outside exception class
+  "TRY300",        # Consider moving statement into else block - not always clearer
+  "B904",          # Use 'raise from' in exception handlers - not always needed
+  "EM102",         # Exception message uses f-string literal - clearer inline
+
+  # Style
+  "COM812", "ISC001", "E501",  # formatter conflicts and line length
+  "E721",          # Use isinstance() instead of type() comparison - sometimes type() is clearer
+
+  # Function calls
+  "FBT001",        # boolean-type-hint-positional-argument
+  "FBT002",        # boolean-default-value-positional-argument (FBT002)
+  "FBT003",        # Don't ban positional boolean arguments
+  
+  # Test structure
+  "TC001",         # Allow multiple test classes per file
+
+  # imports
+  "INP001",       # implicit-namespace-package
+]
