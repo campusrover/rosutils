@@ -1,4 +1,4 @@
-export ROSDISTRO=jazzy
+export ROSDISTRO=kilted
 
 sudo apt-get install -y \
 ros-$ROSDISTRO-imu-filter-madgwick \
