@@ -1,4 +1,4 @@
-export ROSDISTRO=kilted
+export ROSDISTRO=jazzy
 
 sudo apt-get install -y \
 ros-$ROSDISTRO-imu-filter-madgwick \
@@ -19,5 +19,6 @@ ros-$ROSDISTRO-nav2-bringup \
 ros-$ROSDISTRO-slam-toolbox \
 ros-$ROSDISTRO-tf-transformations \
 ros-$ROSDISTRO-navigation2 \
-ros-$ROSDISTRO-nav2-bringup 
+ros-$ROSDISTRO-nav2-bringup \
+ros-$ROSDISTRO-laser-filters
 
