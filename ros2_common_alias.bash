@@ -2,6 +2,7 @@
 echo "[running ~/rosutils/ros2_common_alias.bash]"
 
 # Aliases
+alias allros='ps aux | grep "ros|nav|slam|rviz"'
 alias cs='cd ~/$ROS2_WS/src'
 alias cw='cd ~/$ROS2_WS; source ~/$ROS2_WS/install/setup.bash'
 alias gs='git status'

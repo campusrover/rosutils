@@ -20,5 +20,5 @@ ros-$ROSDISTRO-slam-toolbox \
 ros-$ROSDISTRO-tf-transformations \
 ros-$ROSDISTRO-navigation2 \
 ros-$ROSDISTRO-nav2-bringup \
-ros-${ROS_DISTRO}-rqt-graph
+ros-${ROSDISTRO}-rqt-graph
 
