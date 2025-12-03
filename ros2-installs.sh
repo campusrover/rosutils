@@ -20,5 +20,6 @@ ros-$ROSDISTRO-slam-toolbox \
 ros-$ROSDISTRO-tf-transformations \
 ros-$ROSDISTRO-navigation2 \
 ros-$ROSDISTRO-nav2-bringup \
-ros-$ROSDISTRO-laser-filters
+ros-$ROSDISTRO-laser-filters \
+ros-$ROSDISTRO-rqt-graph
 
