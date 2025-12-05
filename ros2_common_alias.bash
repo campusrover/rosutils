@@ -2,7 +2,7 @@
 echo "[running ~/rosutils/ros2_common_alias.bash]"
 
 # Aliases
-alias allros='ps aux | grep "ros|nav|slam|rviz"'
+alias allros='ps aux | grep -E "ros|nav|slam|rviz"'
 alias cs='cd ~/$ROS2_WS/src'
 alias cw='cd ~/$ROS2_WS; source ~/$ROS2_WS/install/setup.bash'
 alias gs='git status'
@@ -20,6 +20,7 @@ alias pio='platformio'
 alias pioupload='platformio run --target upload'
 alias pioenv='platformio run --environment'
 alias killdome="ssh dome1 'sudo shutdown now'"
+alias bringupdome="ssh dome1 'cw; bl dome mini_bringup_bl.launch.py --rviz_arg false'"
 
 # Bash Functions
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
