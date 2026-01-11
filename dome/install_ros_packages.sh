@@ -22,5 +22,6 @@ ros-$ROSDISTRO-navigation2 \
 ros-$ROSDISTRO-nav2-bringup \
 ros-$ROSDISTRO-rqt-graph \
 ros-$ROSDISTRO-nav2-rviz-plugins \
-ros-$ROSDISTRO-rviz-imu-plugin
-ros-$ROSDISTRO-laser-filters
+ros-$ROSDISTRO-rviz-imu-plugin \
+ros-$ROSDISTRO-laser-filters \
+ros-$ROSDISTRO-foxglove-bridge

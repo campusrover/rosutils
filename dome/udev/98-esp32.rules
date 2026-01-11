@@ -1,2 +1,2 @@
 SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{serial}=="eec5fe24071cef119ca199d94909ffd0", SYMLINK+="esp32"
-SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{serial}=="9a6c88cefe1bef11b51fa3d94909ffd0", SYMLINK+="esp32"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{serial}=="aa99a1a1e97fef11ac25221cedd322a4", SYMLINK+="esp32"
