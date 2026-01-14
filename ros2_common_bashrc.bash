@@ -4,3 +4,5 @@ source ~/rosutils/ros2_common_alias.bash
 export PATH=$PATH:$HOME/.local/bin
 export PS1='[\h:\w] '
 export BL_TUI_KEYBINDS="exit: c-c; nodes: c-n; loglevel: c-l; mute: c-m"
+export BL_UI_OVERRIDE=enable
+export BL_COLORMODE_OVERRIDE=source
