@@ -24,4 +24,5 @@ ros-$ROSDISTRO-rqt-graph \
 ros-$ROSDISTRO-nav2-rviz-plugins \
 ros-$ROSDISTRO-rviz-imu-plugin \
 ros-$ROSDISTRO-laser-filters \
-ros-$ROSDISTRO-foxglove-bridge
+ros-$ROSDISTRO-foxglove-bridge \
+python3-opencv
