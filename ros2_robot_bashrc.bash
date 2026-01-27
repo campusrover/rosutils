@@ -17,4 +17,4 @@ source ~/$ROS2_WS/install/setup.bash
 eval "$(mcfly init bash)"
 export MCFLY_LIGHT=FALSE
 
-PATH="$PATH:$HOME/.platformio/penv/bin"
+PATH="$PATH:$HOME/.platformio/penv/bin:/usr/local/bin"
