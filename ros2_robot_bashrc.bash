@@ -23,6 +23,7 @@ PATH="$PATH:$HOME/.platformio/penv/bin:/usr/local/bin"
 # variables. By adding -a, we export those variables to the environment, so they are available to ROS2 nodes.
 # Another approach would be to write the secrets to a file, and then source that file which might
 # be a a little faster. If needed we can do this in the future.
+
 set -a
 eval $(doppler secrets download --no-file --format env)
 set +a
