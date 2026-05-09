@@ -16,3 +16,4 @@ export LIBGL_ALWAYS_SOFTWARE=1
 
 eval "$(mcfly init bash)"
 export MCFLY_LIGHT=FALSE
+export DOME_MODE=remote
