@@ -32,6 +32,9 @@ alias gitkey='eval "$(ssh-agent -s)";ssh-add "/root/.ssh/cluster"'
 alias rh='cd ~/linorobot2_hardware/firmware/'
 alias rb='cd ~/linorobot2_hardware/firmware/; pio run -t upload'
 alias cb='colcon build'
+alias watch_voltage="watch -n1 'vcgencmd pmic_read_adc | egrep "EXT5V_V|EXT5V_I"'"
+alias get_throttled='vcgencmd get_throttled'
+alias get_temp='vcgencmd measure_temp'
 
 # Alias for online Tailscale nodes
 alias tson='tailscale status --json | jq -r '\''.Peer[] | select(.Online) | .DNSName |= (.[:-1] | split("-clouddesktop")[0]) | .TailscaleIPs[0] as $ip | .DNSName + " - " + $ip'\'''
