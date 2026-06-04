@@ -1,28 +1,21 @@
 #!/bin/bash
 echo "[running ~/rosutils/ros2_robot_bashrc.bash]"
 
+: ${ROS_DISTRO:?ERROR: ROS_DISTRO must be set before sourcing ros2_robot_bashrc.bash}
+
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-source /opt/ros/${ROS_DISTRO:-kilted}/setup.bash
+source /opt/ros/${ROS_DISTRO}/setup.bash
 source ~/rosutils/ros2_common_bashrc.bash
 
-# Linorobot
-export LINOROBOT2_BASE=2wd
-export LINOROBOT2_LASER_SENSOR=ld19
-export LINOROBOT2_DEPTH_SENSOR=
-
 export ROS2_WS=ros2_ws
+export DOME_HOME=${DOME_HOME:-~/.dome}
+export DOME_MODE=robot
 
-eval "$(mcfly init bash)"
-export MCFLY_LIGHT=FALSE
+source ~/rosutils/ros2_dome_bashrc.bash
 
 PATH="$PATH:$HOME/.platformio/penv/bin:/usr/local/bin"
-
-# The dopller secrets command creates a list of set commands, which create shell local
-# variables. By adding -a, we export those variables to the environment, so they are available to ROS2 nodes.
-# Another approach would be to write the secrets to a file, and then source that file which might
-# be a a little faster. If needed we can do this in the future.
 
 if doppler configure get token --plain &>/dev/null 2>&1; then
   set -a
@@ -32,4 +25,5 @@ else
   echo "[doppler] no token configured — skipping secrets"
 fi
 
-export DOME_MODE=robot
+eval "$(mcfly init bash)"
+export MCFLY_LIGHT=FALSE
