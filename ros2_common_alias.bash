@@ -21,6 +21,10 @@ alias pioupload='platformio run --target upload'
 alias pioenv='platformio run --environment'
 alias killdome="ssh dome1 'sudo shutdown now'"
 alias bringupdome="ssh dome1 'cw; bl dome mini_bringup_bl.launch.py --rviz_arg false'"
+alias watch_voltage="watch -n1 'vcgencmd pmic_read_adc | egrep \"EXT5V_V|EXT5V_I\"'"
+alias get_throttled='vcgencmd get_throttled'
+alias get_temp='vcgencmd measure_temp'
+
 
 # Bash Functions
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
