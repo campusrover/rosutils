@@ -3,6 +3,7 @@ echo "[running ~/rosutils/ros2_common_alias.bash]"
 
 # Aliases
 alias allros='ps aux | grep -E "ros|nav|slam|rviz"'
+alias killros='bash ~/rosutils/kill_all_ros2.bash'
 alias cs='cd ~/$ROS2_WS/src'
 alias cw='cd ~/$ROS2_WS; source ~/$ROS2_WS/install/setup.bash'
 alias gs='git status'
@@ -21,6 +22,10 @@ alias pioupload='platformio run --target upload'
 alias pioenv='platformio run --environment'
 alias killdome="ssh dome1 'sudo shutdown now'"
 alias bringupdome="ssh dome1 'cw; bl dome mini_bringup_bl.launch.py --rviz_arg false'"
+alias watch_voltage="watch -n1 'vcgencmd pmic_read_adc | egrep \"EXT5V_V|EXT5V_I\"'"
+alias get_throttled='vcgencmd get_throttled'
+alias get_temp='vcgencmd measure_temp'
+
 
 # Bash Functions
 myip() { ip route get 1.2.3.4 | awk '{print $7}'; }
