@@ -1,4 +1,4 @@
-#!/bin/bash
+t#!/bin/bash
 # rosutils/tmux_restore.bash
 # Run on the robot: sets up tmux layout and attaches via iTerm2 tmux integration
 
@@ -14,6 +14,7 @@ PANE3=""   # bottom-right
 
 if [ -n "$TMUX" ]; then
   # already inside tmux (CC session) — split current window into 2x2
+  echo "Already inside tmux, splitting current window..."
   tmux split-window -h
   tmux split-window -v -t 0
   tmux split-window -v -t 2
