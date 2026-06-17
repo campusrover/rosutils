@@ -1,4 +1,4 @@
-t#!/bin/bash
+#!/bin/bash
 # rosutils/tmux_restore.bash
 # Run on the robot: sets up tmux layout and attaches via iTerm2 tmux integration
 
@@ -30,7 +30,7 @@ else
 
     tmux split-window -h -t $SESSION
     tmux split-window -v -t $SESSION:0.0
-    tmux split-window -v -t $SESSION:0.2
+    tmux split-window -v -tmut $SESSION:0.2
 
     [ -n "$PANE0" ] && tmux send-keys -t $SESSION:0.0 "$PANE0" Enter
     [ -n "$PANE1" ] && tmux send-keys -t $SESSION:0.1 "$PANE1" Enter
