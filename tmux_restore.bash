@@ -12,21 +12,29 @@ PANE2=""   # top-right
 PANE3=""   # bottom-right
 # ───────────────────────────────────────────────────────
 
-SESSION=main
+if [ -n "$TMUX" ]; then
+  # already inside tmux (CC session) — split current window into 2x2
+  tmux split-window -h
+  tmux split-window -v -t 0
+  tmux split-window -v -t 2
 
-if ! tmux has-session -t $SESSION 2>/dev/null; then
-  tmux new-session -d -s $SESSION
+  [ -n "$PANE0" ] && tmux send-keys -t 0 "$PANE0" Enter
+  [ -n "$PANE1" ] && tmux send-keys -t 1 "$PANE1" Enter
+  [ -n "$PANE2" ] && tmux send-keys -t 2 "$PANE2" Enter
+  [ -n "$PANE3" ] && tmux send-keys -t 3 "$PANE3" Enter
+else
+  SESSION=main
+  if ! tmux has-session -t $SESSION 2>/dev/null; then
+    tmux new-session -d -s $SESSION
 
-  # build 2x2 grid
-  tmux split-window -h -t $SESSION          # right column
-  tmux split-window -v -t $SESSION:0.0      # split left column
-  tmux split-window -v -t $SESSION:0.2      # split right column
+    tmux split-window -h -t $SESSION
+    tmux split-window -v -t $SESSION:0.0
+    tmux split-window -v -t $SESSION:0.2
 
-  # send commands to panes (skips empty ones)
-  [ -n "$PANE0" ] && tmux send-keys -t $SESSION:0.0 "$PANE0" Enter
-  [ -n "$PANE1" ] && tmux send-keys -t $SESSION:0.1 "$PANE1" Enter
-  [ -n "$PANE2" ] && tmux send-keys -t $SESSION:0.2 "$PANE2" Enter
-  [ -n "$PANE3" ] && tmux send-keys -t $SESSION:0.3 "$PANE3" Enter
+    [ -n "$PANE0" ] && tmux send-keys -t $SESSION:0.0 "$PANE0" Enter
+    [ -n "$PANE1" ] && tmux send-keys -t $SESSION:0.1 "$PANE1" Enter
+    [ -n "$PANE2" ] && tmux send-keys -t $SESSION:0.2 "$PANE2" Enter
+    [ -n "$PANE3" ] && tmux send-keys -t $SESSION:0.3 "$PANE3" Enter
+  fi
+  exec tmux -CC attach -t $SESSION
 fi
-
-exec tmux -CC attach -t $SESSION
