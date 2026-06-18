@@ -16,7 +16,7 @@ case "$1" in
   *) usage ;;
 esac
 
-PATTERN='ros2|nav2|slam|rviz|gazebo|gzserver|gzclient|robot_state_pub|joint_state_pub|rosbridge|component_container|parameter_server'
+PATTERN='ros2|nav2|slam|rviz|gazebo|gzserver|gzclient|robot_state_pub|joint_state_pub|rosbridge|component_container|parameter_server|ekf_node|bt_navigator|lifecycle_manager|ekf_filter'
 
 pids=$(ps aux | grep -E "$PATTERN" | grep -v grep | awk '{print $2}')
 
@@ -40,10 +40,15 @@ for pid in $pids; do
   fi
   if [[ "$answer" == "y" ]]; then
     pgid=$(echo "$info" | awk '{print $2}')
-    if [[ "$pid" == "$pgid" ]]; then
-      kill -TERM -"$pid" 2>/dev/null && echo "Killed process group $pid"
+    kill -TERM -"$pgid" 2>/dev/null
+    kill -TERM "$pid" 2>/dev/null
+    sleep 0.5
+    if kill -0 "$pid" 2>/dev/null; then
+      kill -KILL "$pid" 2>/dev/null
+      kill -KILL -"$pgid" 2>/dev/null
+      echo "Killed (SIGKILL) pid=$pid pgid=$pgid"
     else
-      kill -TERM "$pid" 2>/dev/null && echo "Killed process $pid"
+      echo "Killed (SIGTERM) pid=$pid pgid=$pgid"
     fi
   fi
 done

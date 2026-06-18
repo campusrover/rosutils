@@ -4,6 +4,7 @@
 
 # ── always pull latest rosutils first ─────────────────
 cd ~/rosutils && git pull --quiet
+cd ~/ros2_ws
 
 # ── pane commands (leave empty for plain shell) ────────
 PANE0=""   # top-left
@@ -30,7 +31,7 @@ else
 
     tmux split-window -h -t $SESSION
     tmux split-window -v -t $SESSION:0.0
-    tmux split-window -v -tmut $SESSION:0.2
+    tmux split-window -v -t $SESSION:0.2
 
     [ -n "$PANE0" ] && tmux send-keys -t $SESSION:0.0 "$PANE0" Enter
     [ -n "$PANE1" ] && tmux send-keys -t $SESSION:0.1 "$PANE1" Enter
