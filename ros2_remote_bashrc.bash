@@ -13,7 +13,6 @@ export ROS2_WS=ros2_ws
 export DOME_HOME=${DOME_HOME:-~/.dome}
 export DOME_MODE=remote
 
-source ~/rosutils/ros2_dome_bashrc.bash
 
 export LIBGL_ALWAYS_SOFTWARE=1
 
