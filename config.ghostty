@@ -1,0 +1,17 @@
+# Make the line between splits clearly visible
+split-divider-color = green
+
+# Dim inactive splits so the active one stands out
+unfocused-split-opacity = 0.8
+unfocused-split-fill = #1a1a1a
+
+# Fonts
+font-family = JetBrains Mono
+font-size = 12
+font-feature = -liga   # disable ligatures if you don't want => rendered as one glyph
+
+scrollback-limit = 4294967295
+
+window-padding-x = 4
+window-padding-y = 4
+window-decoration = auto
