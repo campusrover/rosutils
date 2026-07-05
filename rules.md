@@ -1,7 +1,10 @@
-## Technology and Framework Requirements
+# General Rules
+## Rules for shall scripts
+## Rules for URDF files
+## Rules for Yaml files
+## Rules for Python
     * You shall write code in Python
     * You shall use Python latest and standard package management (uv) for non ROS2 programs
-    * You shall use ROS2 and colcon builds for ROS2 programs
     * You should prefer async/await over threading when there is a choice
     * You should look for existing libraries instead of reinventing solutions
     * You will always have a shebang line
@@ -9,7 +12,7 @@
     * The second comment will say "Author: Pito Salas and Claude Code"
     * The third comment will say "Open Souce Under MIT license"
 
-## Code Structure and Organization
+### Python Code Structure and Organization
     * You shall ensure functions and methods are no longer than 50 lines
     * You shall ensure no files have more than about 300 lines
     * You shall use classes and put them in separate files
@@ -26,7 +29,7 @@
     * You shall use absolute imports with module aliases rather than relative imports
     * You shall put all imports at the top of the file
 
-## Code Quality and Best Practices
+### Python Code Quality and Best Practices
     * You shall write idiomatic Python
     * You should not go overboard on error checking
     * You shall never have bare except Exception: you shall be specific, and also put something in the alert box
@@ -38,5 +41,6 @@
     * You shall not code defensively; let exceptions bubble up rather than handling every possible error case
     * You shall follow YAGNI (You Aren't Gonna Need It): only add functions, methods, or classes that are explicitly required by current requirements; do not add code for anticipated future needs
 
-# CURRENT.md
-    * Now read CURRENT.md and follow it's instructions
+## Rules for ROS
+    * You shall use ROS2 and colcon builds for ROS2 programs
+
