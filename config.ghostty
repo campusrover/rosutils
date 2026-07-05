@@ -24,3 +24,5 @@ window-decoration = auto
 # Keybindings
 keybind = ctrl+shift+o=new_split:right
 keybind = ctrl+shift+e=new_split:down
+keybind = ctrl+shift+equal=equalize_splits
+
