@@ -3,7 +3,7 @@
     * You shall use Python latest and standard package management (uv) for non ROS2 programs
     * You shall use ROS2 and colcon builds for ROS2 programs
     * You should prefer async/await over threading when there is a choice
-    * You should look for existing libraries instead of reinventing solutions
+    * You must look for existing libraries instead of reinventing solutions
     * You will always have a shebang line
     * The first comment will give the name of the module and in one line say what it is
     * The second comment will say "Author: Pito Salas and Claude Code"
@@ -38,5 +38,3 @@
     * You shall not code defensively; let exceptions bubble up rather than handling every possible error case
     * You shall follow YAGNI (You Aren't Gonna Need It): only add functions, methods, or classes that are explicitly required by current requirements; do not add code for anticipated future needs
 
-# CURRENT.md
-    * Now read CURRENT.md and follow it's instructions
