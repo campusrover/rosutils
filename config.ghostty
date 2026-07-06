@@ -1,0 +1,28 @@
+# Make the line between splits clearly visible
+split-divider-color = green
+
+# Dim inactive splits so the active one stands out
+unfocused-split-opacity = 0.8
+unfocused-split-fill = #1a1a1a
+
+# Fonts
+font-family = JetBrains Mono
+font-size = 12
+font-feature = -liga
+keybind = ctrl+plus=increase_font_size:1
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+0=reset_font_size
+
+# scrolling
+scrollback-limit = 4294967295
+
+# window appearance
+window-padding-x = 4
+window-padding-y = 4
+window-decoration = auto
+
+# Keybindings
+keybind = ctrl+shift+o=new_split:right
+keybind = ctrl+shift+e=new_split:down
+keybind = ctrl+shift+equal=equalize_splits
+
