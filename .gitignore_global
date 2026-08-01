@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyx.in
+
+# Virtual envs
+.venv/
+.python-version
+env/
+venv/
+
+# Distribution / packaging
+dist/
+build/
+install/
+*.egg-info/
+*.egg
+MANIFEST
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ROS / colcon
+log/
+
+# Caches
+.cache/
+.mypy_cache/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS metadata
+.DS_Store
+._*
+__MACOSX/
+Thumbs.db
+
+# Claude Code
+.claude/settings.local.json
+.claude/worktrees/
