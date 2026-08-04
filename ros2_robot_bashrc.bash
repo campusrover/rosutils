@@ -17,13 +17,15 @@ source ~/rosutils/ros2_dome_bashrc.bash
 
 PATH="$PATH:$HOME/.platformio/penv/bin:/usr/local/bin"
 
-if doppler configure get token --plain &>/dev/null 2>&1; then
+DOPPLER_TOKEN_CHECK=$(doppler configure get token --plain 2>/dev/null)
+if [ -n "$DOPPLER_TOKEN_CHECK" ]; then
   set -a
   eval $(doppler secrets download --no-file --format env)
   set +a
 else
   echo "[doppler] no token configured — skipping secrets"
 fi
+unset DOPPLER_TOKEN_CHECK
 
 eval "$(mcfly init bash)"
 export MCFLY_LIGHT=FALSE
