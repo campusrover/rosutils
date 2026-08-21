@@ -35,7 +35,7 @@
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SRC_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+SRC_DIR="$HOME/ros2_ws/src"
 
 # shellcheck source=repos.sh
 source "$SCRIPT_DIR/repos.sh"
