@@ -16,6 +16,9 @@
 #   push    - for each repo, `git push` (only pushes repos that have
 #             commits ahead of the remote; repos with uncommitted
 #             changes are skipped with a warning, not auto-committed).
+#   update_claude - `git pull` in ~/j3, then for each repo ask y/n and,
+#             on yes, replace the repo's .claude/ with a copy of
+#             ~/j3/.claude. Does not add/commit/push in the repos.
 #   help/-h - print usage.
 #
 # List of repos to operate on lives in repos.sh (REPOS array), kept
@@ -31,6 +34,7 @@
 #   ./multirepo.sh check
 #   ./multirepo.sh pull
 #   ./multirepo.sh push
+#   ./multirepo.sh update_claude
 #
 set -uo pipefail
 
@@ -88,12 +92,48 @@ cmd_push() {
   git -C "$path" push
 }
 
+cmd_update_claude() {
+  local repo="$1" path="$2"
+  local reply=""
+  read -r -p "Copy .claude into $repo? [y/N] " reply </dev/tty || true
+  case "$reply" in
+    y|Y|yes|YES)
+      rm -rf "$path/.claude"
+      cp -r "$J3_CLAUDE_DIR" "$path/.claude"
+      echo "== $repo: .claude updated =="
+      ;;
+    *)
+      echo "== $repo: skipped =="
+      ;;
+  esac
+}
+
+cmd_update_claude_all() {
+  local j3_dir="$HOME/j3"
+  J3_CLAUDE_DIR="$j3_dir/.claude"
+
+  if [ ! -d "$j3_dir/.git" ]; then
+    echo "$j3_dir is not a git repo, aborting" >&2
+    exit 1
+  fi
+  echo "== j3: pull =="
+  git -C "$j3_dir" pull
+
+  if [ ! -d "$J3_CLAUDE_DIR" ]; then
+    echo "$J3_CLAUDE_DIR not found, aborting" >&2
+    exit 1
+  fi
+
+  for_each_repo cmd_update_claude
+}
+
 main() {
   local sub="${1:-help}"
   case "$sub" in
     check) for_each_repo cmd_check ;;
     pull)  for_each_repo cmd_pull ;;
     push)  for_each_repo cmd_push ;;
+    update_claude) cmd_update_claude_all ;;
     help|-h|--help) usage ;;
     *) echo "Unknown command: $sub"; usage; exit 1 ;;
   esac
