@@ -15,8 +15,9 @@ git clone git@github.com:campusrover/rosutils.git ~/rosutils
 
 ## 2. Add the role block to `~/.bashrc`
 
-`ROS_DISTRO` must be exported *before* sourcing the role script — both role
-scripts refuse to run without it.
+`ROS_DISTRO` must be exported *before* sourcing the role script, on any
+platform that actually has a `/opt/ros/<distro>/setup.bash` to source
+(macOS doesn't — see below, it's handled automatically).
 
 ### Raspberry Pi (robot role)
 
@@ -37,19 +38,32 @@ This also, via the chain it sources:
   run `doppler login` once on that machine if you need secrets there
 - sets up `mcfly` for shell-history search
 
-### Mac (remote role)
+### Mac (remote role, native macOS)
 
-The chain assumes a real Linux + ROS 2 install (`/opt/ros/$ROS_DISTRO/setup.bash`),
-which macOS doesn't provide natively. In practice "Mac" means an Ubuntu VM
-running on the Mac — set it up the same way *inside that VM*:
+Macs in this fleet run macOS directly, not Linux — most of this repo assumes
+a real ROS 2 + Linux install, which a Mac doesn't have. `ros2_remote_bashrc.bash`
+detects macOS (`uname -s = Darwin`) and skips the parts that don't apply there,
+so it's safe to source without any of that installed:
 
 ```bash
-export ROS_DISTRO=<your ROS 2 distro>
 source ~/rosutils/ros2_remote_bashrc.bash
 ```
 
-Same dome-fleet vars and `mcfly` as above; no Doppler or platformio PATH step
-(robot-only).
+(No need to set `ROS_DISTRO` on a Mac — it's only required on Linux, where
+`/opt/ros/$ROS_DISTRO/setup.bash` actually exists.)
+
+On a Mac this still gives you: `ROSUTILS_PLATFORM=macos`/`ROSUTILS_DIR`,
+`DOME_MODE=remote`, the dome-fleet vars from `ros2_dome_bashrc.bash` (they're
+just path/string exports, harmless even if those paths don't exist locally),
+the `mr` alias, and all the general aliases in `ros2_common_alias.bash`. It
+skips: sourcing ROS 2's `setup.bash`, and `mcfly` history search (only if
+`mcfly` isn't installed — installs of it work fine).
+
+What genuinely won't work on a Mac, because it needs a real ROS 2 install:
+any ROS 2 command itself (`ros2 ...`, `colcon build`, the `cb`/`cw`/`cs`
+aliases that assume a built `ros2_ws`), and anything under `mr` that expects
+actual git repos checked out at `~/ros2_ws/src` (fine — `mr check` just
+prints `SKIP (not found)` for repos that aren't there instead of erroring).
 
 ## 3. Verify
 
