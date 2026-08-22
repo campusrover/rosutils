@@ -2,6 +2,7 @@
 echo "[running ~/rosutils/ros2_common_alias.bash]"
 
 # Aliases
+alias mr='~/rosutils/tools/mr/mr.sh'
 alias allros='ps aux | grep -E "ros|nav|slam|rviz"'
 alias killros='bash ~/rosutils/kill_all_ros2.bash'
 alias cs='cd ~/$ROS2_WS/src'
