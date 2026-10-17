@@ -32,10 +32,6 @@ This also, via the chain it sources:
 - pulls in dome-fleet vars (`DOME_CAMERA`, `DOME_PIPER_*`, `DOME_VOICE_CONFIG`,
   `DOME_VISION_CONFIG`, `DOME_SPIN_SURVEY_MAP`) from `ros2_dome_bashrc.bash`
 - adds `~/.platformio/penv/bin` to `PATH` (platformio/Teensy uploads)
-- downloads Doppler secrets automatically **if** a token is already
-  configured on that machine (`doppler configure get token`); otherwise
-  prints `[doppler] no token configured — skipping secrets` and moves on —
-  run `doppler login` once on that machine if you need secrets there
 - sets up `mcfly` for shell-history search
 
 ### Mac (remote role, native macOS)
