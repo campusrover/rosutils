@@ -1,0 +1,12 @@
+{
+  "tui": "fullscreen",
+  "theme": "dark",
+  "editorMode": "normal",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
+  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh"
+  }
+}
