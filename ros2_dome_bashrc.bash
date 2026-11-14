@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[running ~/rosutils/ros2_dome_bashrc.bash]"
+case $- in *i*) echo "[running ~/rosutils/ros2_dome_bashrc.bash]";; esac
 
 # Paths consistent across all DOME-family computers (robots and remotes).
 # Assumes consistent repo layout: ~/ros2_ws/src/dome_*/

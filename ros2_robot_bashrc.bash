@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[running ~/rosutils/ros2_robot_bashrc.bash]"
+case $- in *i*) echo "[running ~/rosutils/ros2_robot_bashrc.bash]";; esac
 
 : ${ROS_DISTRO:?ERROR: ROS_DISTRO must be set before sourcing ros2_robot_bashrc.bash}
 

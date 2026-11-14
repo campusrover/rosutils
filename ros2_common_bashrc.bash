@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[running ~/rosutils/ros2_common_bashrc]"
+case $- in *i*) echo "[running ~/rosutils/ros2_common_bashrc]";; esac
 source ~/rosutils/ros2_common_alias.bash
 export PATH=$PATH:$HOME/.local/bin
 

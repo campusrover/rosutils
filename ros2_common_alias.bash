@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "[running ~/rosutils/ros2_common_alias.bash]"
+case $- in *i*) echo "[running ~/rosutils/ros2_common_alias.bash]";; esac
 
 # Aliases
 alias mr='~/rosutils/tools/mr/mr.sh'
