@@ -29,8 +29,10 @@ source ~/rosutils/ros2_robot_bashrc.bash
 This also, via the chain it sources:
 - sources `/opt/ros/$ROS_DISTRO/setup.bash`
 - sets `DOME_MODE=robot`
-- pulls in dome-fleet vars (`DOME_CAMERA`, `DOME_PIPER_*`, `DOME_VOICE_CONFIG`,
-  `DOME_VISION_CONFIG`, `DOME_SPIN_SURVEY_MAP`) from `ros2_dome_bashrc.bash`
+- pulls in dome-fleet vars (`DOME_CAMERA`, `DOME_PIPER_*`, `DOME_SPIN_SURVEY_MAP`)
+  from `ros2_dome_bashrc.bash`. Config files are not chosen by env var: each
+  launch file passes its package's installed config (dome2's
+  `stack/config_conventions.md`).
 - adds `~/.platformio/penv/bin` to `PATH` (platformio/Teensy uploads)
 - sets up `mcfly` for shell-history search
 
